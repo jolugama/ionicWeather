@@ -1,0 +1,22 @@
+{
+  "extends": ["angular", "eslint:recommended","plugin:jasmine/recommended"],
+  "rules": {
+    "semi": [1,"always"]
+  },
+  "env": {
+    "es6": true,
+    "node": true,
+    "browser": true,
+    "jquery": true
+  },
+  "ecmaFeatures": {
+    "modules": true
+  },
+  "plugins": ["angular", "chai", "html", "jasmine"],
+  "globals": {
+    "cordova": true
+  }
+
+
+
+}

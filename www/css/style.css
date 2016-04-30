@@ -1,0 +1,44 @@
+.scroll-page .icon:before {
+  margin-top:-13px;
+  padding-right: 3px;
+}
+.scroll-page .row + .row {
+  margin-top: 0;
+  padding-top: 5px;
+}
+.scroll-page .row:nth-of-type(odd) {
+  background: #fafafa;
+}
+.scroll-page .row:nth-of-type(even) {
+  background: #f3f3f3;
+}
+.scroll-page .wind-icon {
+  display: inline-block;
+}
+.scroll-page.center {
+  text-align: center;
+}
+.scroll-page .primary {
+  margin: 0;
+  font-size: 90px;
+  font-weight: lighter;
+  padding-left: 30px;
+}
+.scroll-page .secondary {
+  margin: 0;
+  font-size: 180px;
+  font-weight: lighter;
+}
+.scroll-page .has-header {
+  position: relative;
+}
+.iconoDiario{
+    font-size: 40px;
+    display:inline-block;
+    width: 40px;
+}
+.porcentajeIconoDiario{
+  float:left;
+  padding-left: 35px;
+  top: 24.6px;
+}

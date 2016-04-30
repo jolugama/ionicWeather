@@ -1,0 +1,14 @@
+<ion-view view-title="Find Locations">
+  <ion-content>
+    <div class="list">
+      <div class="item item-input-inset">
+        <label class="item-input-wrapper">
+          <input id="inputBusqueda" type="search" ng-model="s.model" placeholder="Search for a location" ng-change="s.search(1000)" focus-me="s.focusInput">
+        </label>
+        <button class="button button-small button-positive" ng-click="s.search(0)">Submit</button>
+      </div>
+      <!-- se realiza un repeat mostrando los resultados con enlaces a la vista weather, dándole un objeto como parámetro  en app.js  url: '/weather/:city/:lat/:lng'-->
+      <div class="item" ng-repeat="result in s.results" ui-sref="weather({city: result.formatted_address, lat: result.geometry.location.lat, lng: result.geometry.location.lng})">{{result.formatted_address}}</div>
+    </div>
+  </ion-content>
+</ion-view>

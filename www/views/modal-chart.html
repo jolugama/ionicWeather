@@ -1,0 +1,13 @@
+<ion-modal-view>
+  <ion-header-bar class="bar-dark">
+    <h1 class="title">Calendario solar</h1>
+    <button class="button button-clear" ng-click="hideModal()">Close</button>
+  </ion-header-bar>
+  <ion-content>
+    <div class="list">
+      <div class="item text-center" collection-repeat="day in chart">
+        {{day.sunrise | nombreMes}}:  {{day.sunrise | date:'H:mm' }} - {{day.sunset | date:'H:mm'}}
+      </div>
+    </div>
+  </ion-content>
+</ion-modal-view>

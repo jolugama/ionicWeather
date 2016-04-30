@@ -1,0 +1,54 @@
+<ion-view view-title="{{params.city}}">
+  <ion-nav-buttons side="left">
+    <button class="button button-clear" menu-toggle="left"><span class="icon ion-navicon"></span></button>
+  </ion-nav-buttons>
+  <ion-nav-buttons side="right">
+    <button class="button button-icon" ng-click="w.showOptions()"><span class="icon ion-more"></span></button>
+  </ion-nav-buttons>
+  <ion-content>
+    <ion-scroll direction="y" paging="true" scrollbar-y="false" ng-style="{width: w.getWidth(), height: w.getHeight()}">
+      <div ng-style="{height: w.getTotalHeight()}">
+        <div class="scroll-page center" ng-style="{width: w.getWidth(), height: w.getHeight()}">
+          <div class="bar bar-dark">
+            <h1 class="title">{{w.params.city}}</h1>
+          </div>
+          <div class="has-header">
+            <h2 class="primary">{{w.forecast.currently.temperature | temperatura}}</h2>
+            <h2 class="secondary icon" ng-class="w.forecast.currently.icon | icons"></h2>
+            <p>{{w.forecast.currently.summary}}</p>
+            <p>Temperatura Min/Max: {{w.forecast.daily.data[0].temperatureMin | temperatura}} / {{w.forecast.daily.data[0].temperatureMax | temperatura}} </p>
+            <p>Sensación térmica: {{w.forecast.currently.apparentTemperature | temperatura}}</p>
+            <p>Viento: {{w.forecast.currently.windSpeed | number:0}} <span class="icon wind-icon ion-ios7-arrow-thin-up" ng-style="{transform: 'rotate(' + w.forecast.currently.windBearing + 'deg)'}"></span></p>
+          </div>
+        </div>
+        <div class="scroll-page" ng-style="{width: w.getWidth(), height: w.getHeight()}">
+          <div class="bar bar-dark">
+            <h1 class="title">Predicción {{w.settings.days}} días</h1>
+          </div>
+          <div class="has-header">
+            <p class="padding">{{w.forecast.daily.summary}}</p>
+            <div class="row" ng-repeat="day in w.forecast.daily.data | limitTo:w.settings.days">
+              <!-- <div class="col-25">{{day.time + '000' | date:'EEEE'}}</div> -->
+              <div class="col-25"> {{day.time | diaSemana:w.forecast.timezone}}</div>
+              <div class="col"><span class="icon  iconoDiario" ng-class="day.icon | icons"></span><sup class="porcentajeIconoDiario">{{day.precipProbability | porcentajeRedondeo}}</sup></div>
+              <div class="col">{{day.temperatureMin | temperatura}}</div>
+              <div class="col">{{day.temperatureMax | temperatura}}</div>
+            </div>
+          </div>
+        </div>
+        <div class="scroll-page" ng-style="{width: getWidth(), height: getHeight()}">
+          <div class="bar bar-dark">
+            <h1 class="title">Datos del Clima</h1>
+          </div>
+          <div class="list has-header">
+            <div class="item">Sol: {{w.forecast.daily.data[0].sunriseTime | timezone:w.forecast.timezone}}</div>
+            <div class="item">Ocaso: {{w.forecast.daily.data[0].sunsetTime | timezone:w.forecast.timezone}}</div>
+
+            <div ng-if="w.forecast.currently.visibility" class="item">Visibilidad: {{w.forecast.currently.visibility}}</div>
+            <div  ng-if="w.forecast.currently.humidity" class="item">Humedad: {{w.forecast.currently.humidity | porcentaje}}</div>
+          </div>
+        </div>
+      </div>
+    </ion-scroll>
+  </ion-content>
+</ion-view>
