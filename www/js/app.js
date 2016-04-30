@@ -16,7 +16,6 @@ angular.module('App', ['ionic'])
   .state('settings', {
     url: '/settings',
     controller: 'SettingsController',
-    controllerAs: 'st',
     templateUrl: 'views/settings.html'
   })
   .state('weather', {
@@ -56,7 +55,6 @@ angular.module('App', ['ionic'])
   };
   return Settings;
 })
-.controller('LeftMenuController', function (ubicacionesService) {
-  var vm=this;
-  vm.locations = ubicacionesService.data;
+.controller('LeftMenuController', function ($scope, ubicacionesService) {
+  $scope.locations = ubicacionesService.data;
 })

@@ -14,7 +14,9 @@ function WeatherController($scope, $stateParams, $ionicActionSheet, $ionicModal,
 
   var barHeight = document.getElementsByTagName('ion-header-bar')[0].clientHeight;
   vm.getWidth = function () {
+	console.log('getWidth()',window.innerWidth + 'px')
     return window.innerWidth + 'px';
+
   };
   vm.getTotalHeight = function () {
     return parseInt(parseInt(vm.getHeight()) * 3) + 'px';
@@ -71,4 +73,5 @@ function WeatherController($scope, $stateParams, $ionicActionSheet, $ionicModal,
   $scope.$on('$destroy', function() {
     vm.modal.remove();
   });
+  return vm;
 }

@@ -1,8 +1,8 @@
 angular.module('App')
 .controller('SearchController', SearchController);
-SearchController.$inject=['$log','$timeout','$ionicPopup','geocodeService'];
+SearchController.$inject=['$scope','$log','$timeout','$ionicPopup','geocodeService'];
 
-function SearchController($log, $timeout, $ionicPopup, geocodeService) {
+function SearchController($scope, $log, $timeout, $ionicPopup, geocodeService) {
   var vm=this;
   vm.model = '';
   vm.bloqueo=false;

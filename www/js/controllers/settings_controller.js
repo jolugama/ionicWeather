@@ -1,8 +1,8 @@
 angular.module('App')
 .controller('SettingsController', SettingsController);
-SettingsController.$inject=['Settings','ubicacionesService'];
+SettingsController.$inject=['$scope','Settings','ubicacionesService'];
 
-function SettingsController(Settings, ubicacionesService){
+function SettingsController($scope,Settings, ubicacionesService){
   var vm=this;
   vm.settings = Settings;
   vm.locations = ubicacionesService.data;

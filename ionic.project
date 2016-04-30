@@ -1,6 +1,6 @@
 {
   "name": "Ionic Weather",
-  "app_id": "",
+  "app_id": "86ab324b",
   "proxies": [
     {
       "path": "/api/forecast",
