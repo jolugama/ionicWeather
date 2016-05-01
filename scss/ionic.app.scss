@@ -71,3 +71,6 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 .scroll-view.scroll-y {
 //  overflow-y: hidden;
 }
+.ion-content{
+  overflow-scroll:false;
+}

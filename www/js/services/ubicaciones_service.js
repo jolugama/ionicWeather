@@ -1,48 +1,61 @@
 
 angular.module('App')
-.factory('ubicacionesService',UbicacionesService);
-UbicacionesService.$inject=['$ionicPopup'];
+.factory('ubicacionesService',ubicacionesService);
+ubicacionesService.$inject=['$ionicPopup'];
 
-function UbicacionesService($ionicPopup){
-  var Locations = {
+function ubicacionesService($ionicPopup){
+
+  var ubicaciones = {
     data: [],
     getIndex: function (item) {
+      var that=this;
       var index = -1;
-      angular.forEach(Locations.data, function (location, i) {
-        if (item.lat == location.lat && item.lng == location.lng) {
+      angular.forEach(that.data, function (ubicacion, i) {
+        if (item.lat == ubicacion.lat && item.lng == ubicacion.lng) {
           index = i;
         }
       });
       return index;
     },
     toggle: function (item) {
-      var index = Locations.getIndex(item);
+      var that=this;
+      var index = that.getIndex(item);
       if (index >= 0) {
         $ionicPopup.confirm({
           title: 'Esta seguro?',
-          template: 'Vas a remover ' + Locations.data[index].city
+          template: 'Vas a remover ' + that.data[index].city
         }).then(function (res) {
           if (res) {
-            Locations.data.splice(index, 1);
+            that.data.splice(index, 1);
+            that.setStorage(that.data);
           }
         });
       } else {
-        Locations.data.push(item);
+        that.data.push(item);
+        that.setStorage(that.data);
         $ionicPopup.alert({
           title: 'Guardado en favoritos'
         });
       }
     },
     primary: function (item) {
-      var index = Locations.getIndex(item);
+      var that=this;
+      var index = that.getIndex(item);
       if (index >= 0) {
-        Locations.data.splice(index, 1);
-        Locations.data.splice(0, 0, item);
+        that.data.splice(index, 1);
+        that.data.splice(0, 0, item);
       } else {
-        Locations.data.unshift(item);
+        that.data.unshift(item);
       }
+      that.setStorage(that.data);
+    },
+    getStorage: function(){
+      return angular.fromJson(localStorage.getItem('ionicWeather-data'));
+    },
+    setStorage: function(data){
+      localStorage.setItem('ionicWeather-data',angular.toJson(data));
     }
   };
-
-  return Locations;
+  ubicaciones.data=ubicaciones.getStorage();
+  return ubicaciones;
 }

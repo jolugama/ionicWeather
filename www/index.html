@@ -37,7 +37,7 @@
 <script src="js/controllers/weather_controller.js"></script>
 
 </head>
-<body ng-app="App">
+<body ng-app="App" class="platform-android">
 
   <ion-side-menus ng-cloak="">
 
@@ -52,7 +52,7 @@
       <ion-nav-view></ion-nav-view>
     </ion-side-menu-content>
 
-    <ion-side-menu side="left" ng-controller="LeftMenuController">
+    <ion-side-menu side="left" ng-controller="LeftMenuController as m">
       <ion-header-bar class="bar-dark">
         <h1 class="title">El tiempo Ionic</h1>
       </ion-header-bar>
@@ -61,7 +61,7 @@
           <ion-item class="item-icon-left" ui-sref="search" menu-close=""><span class="icon ion-search"></span> Buscar Ciudad</ion-item>
           <ion-item class="item-icon-left" ui-sref="settings" menu-close=""><span class="icon ion-ios-cog"></span> Configuracion</ion-item>
           <ion-item class="item-divider">Favoritos</ion-item>
-          <ion-item class="item-icon-left" ui-sref="weather({city: location.city, lat: location.lat, lng: location.lng})" menu-close="" ng-repeat="location in locations"><span class="icon ion-ios-location"></span> {{location.city}}</ion-item>
+          <ion-item class="item-icon-left" ui-sref="weather({city: ubicacion.city, lat: ubicacion.lat, lng: ubicacion.lng})" ui-sref-opts="{reload: true}" menu-close="" ng-repeat="ubicacion in m.ubicaciones"><span class="icon ion-ios-location"></span> {{ubicacion.city}}</ion-item>
         </ion-list>
       </ion-content>
     </ion-side-menu>

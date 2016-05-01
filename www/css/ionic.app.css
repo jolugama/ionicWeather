@@ -9832,3 +9832,6 @@ a.button {
   float: left;
   padding-left: 35px;
   top: 24.6px; }
+
+.ion-content {
+  overflow-scroll: false; }
