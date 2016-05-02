@@ -1,16 +1,20 @@
 angular.module('App')
 .controller('WeatherController', WeatherController);
-WeatherController.$inject=['$scope', '$stateParams', '$ionicActionSheet', '$ionicModal', 'ubicacionesService', 'Settings', 'forecastService'];
+WeatherController.$inject=['$scope', '$stateParams', '$ionicPlatform', '$ionicActionSheet', '$ionicModal', 'ubicacionesService', 'Settings', 'forecastService'];
 
-function WeatherController($scope, $stateParams, $ionicActionSheet, $ionicModal, ubicacionesService, Settings, forecastService){
+function WeatherController($scope, $stateParams,   $ionicPlatform, $ionicActionSheet, $ionicModal, ubicacionesService, Settings, forecastService){
+  $scope.carga=false;
   var vm=this;
   vm.params = $stateParams;  //parametros que se han pasado desde la vista search con ui-sref, en app.js url: '/weather/:city/:lat/:lng'
   vm.settings = Settings;
 
   //llama a servicio forecast
-  forecastService.getForecast(vm.params,vm.settings).then(function(response){
+  $scope.carga=forecastService.getForecast(vm.params,vm.settings).then(function(response){
     vm.forecast = response;
   });
+
+
+
 
   var barHeight = document.getElementsByTagName('ion-header-bar')[0].clientHeight;
   vm.getWidth = function () {

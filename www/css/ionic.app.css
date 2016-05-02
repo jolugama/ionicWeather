@@ -9831,7 +9831,32 @@ a.button {
 .porcentajeIconoDiario {
   float: left;
   padding-left: 35px;
-  top: 24.6px; }
+  top: -27.4px; }
 
 .ion-content {
   overflow-scroll: false; }
+
+.loading-sign .spinner svg {
+  width: 90px !important;
+  height: 90px !important;
+  stroke: #444;
+  fill: #444;
+  display: block;
+  margin: auto; }
+
+.loading-wrapper {
+  position: absolute   !important;
+  background: rgba(255, 255, 255, 0.9); }
+
+.loading-sign {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 50%;
+  height: 50%;
+  margin-top: 50%; }
+
+.ocultar {
+  color: #FFF; }

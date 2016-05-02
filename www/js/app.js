@@ -3,7 +3,15 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('App', ['ionic'])
+angular.module('App', ['ionic','ngAnimate','cgBusy'])
+.value('cgBusyDefaults',{
+  message:'Cargando...',
+  backdrop: false,
+  templateUrl: '../views/loading.html',
+  delay: 0,
+  minDuration: 1700,
+  wrapperClass: 'loading'
+})
 .config(function ($stateProvider, $urlRouterProvider) {
 
   $stateProvider
@@ -21,6 +29,7 @@ angular.module('App', ['ionic'])
   })
   .state('weather', {
     url: '/weather/:city/:lat/:lng',
+    cache: false,
     controller: 'WeatherController',
     controllerAs: 'w',
     templateUrl: 'views/weather.html'

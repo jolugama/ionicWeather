@@ -14,7 +14,8 @@ angular.module('App')
     if (input && timezone) {
       moment.locale('es');
       var time = moment.tz(input * 1000, timezone);
-      return time.format('dddd');
+      var fecha=time.format('llll').split('.');
+      return fecha[0]+fecha[1];
     }
     return '';
   };
