@@ -45,7 +45,7 @@ angular.module('App')
   return function (n) {
     if (n) {
       var value = n * 100;
-      return value!==0 ? value + '%' : '';
+      return value!==0 ? Math.round(value) + '%' : '';
     }
   };
 })

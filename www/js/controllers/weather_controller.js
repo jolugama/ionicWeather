@@ -73,7 +73,7 @@ function WeatherController($scope, $stateParams,   $ionicPlatform, $ionicActionS
     vm.modal.hide();
   };
   $scope.$on('$destroy', function() {
-    vm.modal.remove();
+  //  vm.modal.remove();
   });
   return vm;
 }

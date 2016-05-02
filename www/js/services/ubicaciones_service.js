@@ -56,6 +56,9 @@ function ubicacionesService($ionicPopup){
       localStorage.setItem('ionicWeather-data',angular.toJson(data));
     }
   };
-  ubicaciones.data=ubicaciones.getStorage();
+  if(ubicaciones.getStorage()){
+    ubicaciones.data=ubicaciones.getStorage();
+  }
+
   return ubicaciones;
 }
