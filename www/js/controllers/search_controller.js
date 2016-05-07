@@ -4,9 +4,19 @@ SearchController.$inject=['$scope','$log','$timeout','$ionicPopup','geocodeServi
 
 function SearchController($scope, $log, $timeout, $ionicPopup, geocodeService) {
   var vm=this;
-  vm.model = '';
+  vm.busqueda = '';
   vm.bloqueo=false;
-  vm.focusInput=true; //controla el foco del input de busqueda(a través de la directiva focusMe). si es true se focaliza.
+
+  vm.esAndroid=false;
+  if(ionic && ionic.Platform){
+    vm.esAndroid=ionic.Platform.isAndroid();
+  }
+
+  vm.onclickInput=function(){
+    vm.busqueda='';
+    vm.search(0);
+  }
+
   /**
   * abre una alerta ionic
   * @param  {string} titulo  titulo de la alerta
@@ -32,7 +42,7 @@ function SearchController($scope, $log, $timeout, $ionicPopup, geocodeService) {
     vm.bloqueo=true;
     $timeout(function () {
       vm.bloqueo=false;
-      var busqueda=vm.model;
+      var busqueda=vm.busqueda;
       if( busqueda.indexOf(',')===-1 && busqueda.length>1){
         busqueda+=',es';
       }

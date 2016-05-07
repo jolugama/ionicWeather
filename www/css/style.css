@@ -77,6 +77,12 @@
 .ocultar {
   color: #FFF; }
 
+.sinScrollBar {
+  overflow: hidden !important; }
+
+.margenIzq {
+  margin-left: 10px; }
+
 @media (min-height: 500px) {
   .scroll-page .primary {
     margin: 0;

@@ -3,17 +3,42 @@ angular.module('App')
 WeatherController.$inject=['$scope', '$stateParams', '$ionicPlatform', '$ionicActionSheet', '$ionicModal', 'ubicacionesService', 'Settings', 'forecastService'];
 
 function WeatherController($scope, $stateParams,   $ionicPlatform, $ionicActionSheet, $ionicModal, ubicacionesService, Settings, forecastService){
+
+
   $scope.carga=false;
   var vm=this;
   vm.params = $stateParams;  //parametros que se han pasado desde la vista search con ui-sref, en app.js url: '/weather/:city/:lat/:lng'
   vm.settings = Settings;
+
+
+
+  //slider
+  vm.optionsSlider = {
+    loop: false,
+    speed: 400
+  }
+  vm.dataSlider = {};
+  $scope.$watch('data.slider', function(nv, ov) {
+    vm.slider = vm.dataSlider.slider;
+  })
+  //fin slider
+
 
   //llama a servicio forecast
   $scope.carga=forecastService.getForecast(vm.params,vm.settings).then(function(response){
     vm.forecast = response;
   });
 
-
+  vm.refrescar = function() {
+    console.log('llamando al refresco')
+    //llama a servicio forecast
+    $scope.carga=forecastService.getForecast(vm.params,vm.settings).then(function(response){
+      vm.forecast = response;
+    }).finally(function() {
+       // Stop the ion-refresher from spinning
+       $scope.$broadcast('scroll.refreshComplete');
+     });
+  };
 
 
   var barHeight = document.getElementsByTagName('ion-header-bar')[0].clientHeight;
@@ -73,7 +98,7 @@ function WeatherController($scope, $stateParams,   $ionicPlatform, $ionicActionS
     vm.modal.hide();
   };
   $scope.$on('$destroy', function() {
-  //  vm.modal.remove();
+    //  vm.modal.remove();
   });
   return vm;
 }

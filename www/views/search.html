@@ -3,12 +3,17 @@
     <div class="list">
       <div class="item item-input-inset">
         <label class="item-input-wrapper">
-          <input id="inputBusqueda" type="search" ng-model="s.model" placeholder="Buscar un municipio" ng-change="s.search(1000)" focus-me="s.focusInput">
+          <input id="inputBusqueda" type="search" ng-model="s.busqueda" ng-click="s.onclickInput()" placeholder="Buscar un municipio" ng-change="s.search(1000)" re-focus>
         </label>
         <button class="button button-small button-positive" ng-click="s.search(0)">Submit</button>
       </div>
       <!-- se realiza un repeat mostrando los resultados con enlaces a la vista weather, dándole un objeto como parámetro  en app.js  url: '/weather/:city/:lat/:lng'-->
-      <div class="item" ng-repeat="result in s.results" ui-sref="weather({city: result.formatted_address, lat: result.geometry.location.lat, lng: result.geometry.location.lng})">{{result.formatted_address}}</div>
+      <span ng-if="s.esAndroid">
+          <div class="item" ng-repeat="result in s.results"  ui-sref="weather2({city: result.formatted_address, lat: result.geometry.location.lat, lng: result.geometry.location.lng})" ui-sref-opts="{reload: true}">{{result.formatted_address}}</div>
+      </span>
+      <span ng-if="!s.esAndroid">
+          <div class="item" ng-repeat="result in s.results" ui-sref="weather({city: result.formatted_address, lat: result.geometry.location.lat, lng: result.geometry.location.lng})" ui-sref-opts="{reload: true}">{{result.formatted_address}}</div>
+      </span>
     </div>
   </ion-content>
 </ion-view>

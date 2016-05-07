@@ -14,6 +14,7 @@ angular.module('App', ['ionic','ngCordova','ngAnimate','cgBusy'])
 })
 .config(function ($stateProvider, $urlRouterProvider) {
 
+
   $stateProvider
   .state('search', {
     url: '/search',
@@ -33,6 +34,13 @@ angular.module('App', ['ionic','ngCordova','ngAnimate','cgBusy'])
     controller: 'WeatherController',
     controllerAs: 'w',
     templateUrl: 'views/weather.html'
+  })
+  .state('weather2', {
+    url: '/weather2/:city/:lat/:lng',
+    cache: false,
+    controller: 'WeatherController',
+    controllerAs: 'w',
+    templateUrl: 'views/weather2.html'
   })
   ;
 
@@ -68,5 +76,9 @@ angular.module('App', ['ionic','ngCordova','ngAnimate','cgBusy'])
 .controller('LeftMenuController', function (ubicacionesService) {
   var vm=this;
   vm.ubicaciones = ubicacionesService.data;
+  vm.esAndroid=false;
+  if(ionic && ionic.Platform){
+    vm.esAndroid=ionic.Platform.isAndroid();
+  }
   return vm;
 })

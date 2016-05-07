@@ -95,10 +95,19 @@
   color:#FFF;
 }
 
+.sinScrollBar {
+  overflow: hidden !important;
+}
 
-
+.margenIzq {
+  margin-left:10px;
+}
 
 @media (min-height: 500px)  {
+  // ion-side-menus{
+  //   width: 700px !important;
+  //   margin: 0 auto !important;
+  // }
   .scroll-page .primary {
     margin: 0;
     font-size: 50px;
@@ -116,6 +125,8 @@
   }
 
 }
+
+
 
 @media (min-height: 700px) {
   .scroll-page .primary {

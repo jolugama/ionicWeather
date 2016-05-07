@@ -7,8 +7,10 @@
     <button class="button button-icon" ng-click="w.showOptions()"><span class="icon ion-more"></span></button>
   </ion-nav-buttons>
   <ion-content>
-    <ion-scroll direction="y" paging="true" scrollbar-y="false"  ng-style="{width: w.getWidth(), height: w.getHeight()}">
+    <ion-scroll direction="y" paging="true" scrollbar-y="true"  ng-style="{width: w.getWidth(), height: w.getHeight()}" class="sinScrollBar">
       <div ng-style="{height: w.getTotalHeight()}">
+
+        <!-- 1ª pantalla.  -->
         <div class="scroll-page center" ng-style="{width: w.getWidth(), height: w.getHeight()}">
           <div class="bar bar-dark">
             <h1 class="title">{{w.params.city}}</h1>
@@ -22,6 +24,8 @@
             <p ng-class="w.forecast ? '' : 'ocultar'">Viento: {{w.forecast.currently.windSpeed | number:0}} <span class="icon wind-icon ion-ios7-arrow-thin-up" ng-style="{transform: 'rotate(' + w.forecast.currently.windBearing + 'deg)'}"></span></p>
           </div>
         </div>
+
+        <!-- 2ª pantalla.  -->
         <div class="scroll-page" ng-style="{width: w.getWidth(), height: w.getHeight()}">
           <div class="bar bar-dark">
             <h1 class="title">Predicción {{w.settings.days}} días</h1>
@@ -30,14 +34,16 @@
             <p class="padding">{{w.forecast.daily.summary}}</p>
             <div class="row" ng-repeat="day in w.forecast.daily.data | limitTo:w.settings.days">
               <!-- <div class="col-25">{{day.time + '000' | date:'EEEE'}}</div> -->
-              <div class="col-40"> {{day.time | diaSemana:w.forecast.timezone}}</div>
+              <div class="col-40 margenIzq"> {{day.time | diaSemana:w.forecast.timezone}}</div>
               <div class="col"><span class="icon  iconoDiario" ng-class="day.icon | icons"></span><sup class="porcentajeIconoDiario">{{day.precipProbability | porcentajeRedondeo}}</sup></div>
               <div class="col">{{day.temperatureMin | temperatura}}</div>
               <div class="col">{{day.temperatureMax | temperatura}}</div>
             </div>
           </div>
         </div>
-        <div class="scroll-page" ng-style="{width: getWidth(), height: getHeight()}">
+
+        <!-- 3ª pantalla.  -->
+        <div class="scroll-page" ng-style="{width: w.getWidth(), height: w.getHeight()}">
           <div class="bar bar-dark">
             <h1 class="title">Datos del Clima</h1>
           </div>
@@ -49,6 +55,7 @@
             <div  ng-if="w.forecast.currently.humidity" class="item">Humedad: {{w.forecast.currently.humidity | porcentaje}}</div>
           </div>
         </div>
+
       </div>
     </ion-scroll>
   </ion-content>

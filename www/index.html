@@ -42,35 +42,42 @@
 
 </head>
 <body ng-app="App" class="platform-android">
-
+  <!-- menú deslizante: permite un menu a la izq o derecha ser tocado o arrastrado al lado del contenedor principal. (el típico menu móvil) -->
   <ion-side-menus ng-cloak="">
 
     <ion-side-menu-content>
+      <!-- barra cabecera  -->
       <ion-nav-bar class="bar-royal">
         <ion-nav-buttons side="left">
-          <button class="button button-clear" menu-toggle="left">
-            <span class="icon ion-navicon"></span>
-          </button>
+          <button class="button button-clear" menu-toggle="left"><span class="icon ion-navicon"></span></button>
         </ion-nav-buttons>
       </ion-nav-bar>
-      <ion-nav-view></ion-nav-view>
+      <!-- fin barra cabecera -->
+       <ion-nav-view></ion-nav-view> <!--vista main -->
     </ion-side-menu-content>
 
+    <!-- contenedor del menu -->
     <ion-side-menu side="left" ng-controller="LeftMenuController as m">
       <ion-header-bar class="bar-dark">
-        <h1 class="title">El tiempo Ionic</h1>
+        <h1 class="title">El tiempo JoLuGaMa</h1>
       </ion-header-bar>
       <ion-content>
         <ion-list>
           <ion-item class="item-icon-left" ui-sref="search" menu-close=""><span class="icon ion-search"></span> Buscar Ciudad</ion-item>
           <ion-item class="item-icon-left" ui-sref="settings" menu-close=""><span class="icon ion-ios-cog"></span> Configuracion</ion-item>
-          <ion-item class="item-divider">Favoritos</ion-item>
-          <ion-item class="item-icon-left" ui-sref="weather({city: ubicacion.city, lat: ubicacion.lat, lng: ubicacion.lng})" ui-sref-opts="{reload: true}" menu-close="" ng-repeat="ubicacion in m.ubicaciones"><span class="icon ion-ios-location"></span> {{ubicacion.city}}</ion-item>
+          <ion-item  class="item-divider">Favoritos</ion-item>
+          <span ng-if="m.esAndroid">
+            <ion-item class="item-icon-left" ui-sref="weather2({city: ubicacion.city, lat: ubicacion.lat, lng: ubicacion.lng})" ui-sref-opts="{reload: true}" menu-close="" ng-repeat="ubicacion in m.ubicaciones"><span class="icon ion-ios-location"></span> {{ubicacion.city}}</ion-item>
+          </span>
+          <span ng-if="!m.esAndroid">
+            <ion-item class="item-icon-left" ui-sref="weather({city: ubicacion.city, lat: ubicacion.lat, lng: ubicacion.lng})" ui-sref-opts="{reload: true}" menu-close="" ng-repeat="ubicacion in m.ubicaciones"><span class="icon ion-ios-location"></span> {{ubicacion.city}}</ion-item>
+          </span>
         </ion-list>
       </ion-content>
     </ion-side-menu>
-
+    <!-- fin contenedor del menu -->
 
   </ion-side-menus>
+
 </body>
 </html>
