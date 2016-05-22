@@ -1,64 +1,88 @@
 angular.module('App')
 .controller('WeatherController', WeatherController);
-WeatherController.$inject=['$scope', '$stateParams', '$ionicPlatform', '$ionicActionSheet', '$ionicModal', 'ubicacionesService', 'Settings', 'forecastService'];
+WeatherController.$inject=['$scope','$window','$log', '$stateParams', '$ionicPlatform', '$ionicLoading', '$ionicActionSheet', '$ionicModal', '$timeout', 'ubicacionesService', 'Settings', 'forecastService'];
 
-function WeatherController($scope, $stateParams,   $ionicPlatform, $ionicActionSheet, $ionicModal, ubicacionesService, Settings, forecastService){
+function WeatherController($scope, $window, $log, $stateParams, $ionicPlatform, $ionicLoading, $ionicActionSheet, $ionicModal, $timeout, ubicacionesService, Settings, forecastService){
 
-
-  $scope.carga=false;
   var vm=this;
+  vm.carga=false;
   vm.params = $stateParams;  //parametros que se han pasado desde la vista search con ui-sref, en app.js url: '/weather/:city/:lat/:lng'
   vm.settings = Settings;
 
 
 
-  //slider
-  vm.optionsSlider = {
-    loop: false,
-    speed: 400
-  }
-  vm.dataSlider = {};
-  $scope.$watch('data.slider', function(nv, ov) {
-    vm.slider = vm.dataSlider.slider;
-  })
-  //fin slider
-
-
-  //llama a servicio forecast
-  $scope.carga=forecastService.getForecast(vm.params,vm.settings).then(function(response){
-    vm.forecast = response;
-  });
-
-  vm.refrescar = function() {
-    console.log('llamando al refresco')
-    //llama a servicio forecast
-    $scope.carga=forecastService.getForecast(vm.params,vm.settings).then(function(response){
-      vm.forecast = response;
-    }).finally(function() {
-       // Stop the ion-refresher from spinning
-       $scope.$broadcast('scroll.refreshComplete');
-     });
+  /**
+   * carga del loading ionic. duration: duración máxima. Tiene un lag de 1 segundo (en ionic hide)
+   */
+  vm.loadingOpen = function() {
+    vm.carga=false;
+    $ionicLoading.show({
+      templateUrl: '../views/loadingIonic.html',
+      duration: 10000
+    });
+  };
+  vm.loadingClose = function(){
+    $timeout(function () {
+      $ionicLoading.hide();
+      vm.carga=true;
+    }, 1500);
   };
 
 
-  var barHeight = document.getElementsByTagName('ion-header-bar')[0].clientHeight;
+
+  //slider weather2.html para android
+  vm.optionsSlider = {
+    loop: false,
+    speed: 400
+  };
+  vm.dataSlider = {};
+  $scope.$watch('data.slider', function() {
+    vm.slider = vm.dataSlider.slider;
+  });
+  //fin slider
+
+
+  //refresca la pantalla y llama al rest forecast
+  vm.refrescar = function() {
+    vm.loadingOpen();
+    console.log('llamando al refresco');
+    //llama a servicio forecast
+    forecastService.getForecast(vm.params,vm.settings).then(function(response){
+      vm.forecast = response;
+    }).finally(function() {
+      // Stop the ion-refresher from spinning
+      $scope.$broadcast('scroll.refreshComplete');
+      vm.loadingClose();
+
+    });
+  };
+
+vm.refrescar();
+
+
+  var barHeight = angular.element(document).find('ion-header-bar')[0].clientHeight;
   vm.getWidth = function () {
-    return window.innerWidth + 'px';
+    return $window.innerWidth + 'px';
   };
   vm.getTotalHeight = function () {
     return parseInt(parseInt(vm.getHeight()) * 3) + 'px';
   };
   vm.getHeight = function () {
-    return parseInt(window.innerHeight - barHeight) + 'px';
+    return parseInt($window.innerHeight - barHeight) + 'px';
   };
   vm.showOptions = function () {
-    var sheet = $ionicActionSheet.show({
+    $ionicActionSheet.show({
+      titleText: 'Opciones',
       buttons: [
-        {text: 'Guardar a favoritos'},
+        {text: 'Añadir/remover favoritos'},
         {text: 'Seleccionar como primario'},
         {text: 'Calendario solar'}
       ],
-      cancelText: 'Cancelar',
+      cancelText: 'Cancel',
+	cancel: function() {
+		$log.debug('CANCELLED');
+  },
+
       buttonClicked: function (index) {
         if (index === 0) {
           ubicacionesService.toggle($stateParams);

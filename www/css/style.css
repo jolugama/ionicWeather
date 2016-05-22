@@ -4,7 +4,7 @@
 
 .scroll-page .row + .row {
   margin-top: 0;
-  padding-top: 5px; }
+  padding: 0px; }
 
 .scroll-page .row:nth-of-type(odd) {
   background: #fafafa; }
@@ -36,12 +36,12 @@
 
 .scroll-page .primary {
   margin: 0;
-  font-size: 30px;
+  font-size: 4em;
   font-weight: lighter; }
 
 .scroll-page .secondary {
   margin: 0;
-  font-size: 100px;
+  font-size: 12em;
   font-weight: lighter; }
 
 .loading-sign .spinner svg {
@@ -83,27 +83,76 @@
 .margenIzq {
   margin-left: 10px; }
 
-@media (min-height: 500px) {
-  .scroll-page .primary {
-    margin: 0;
-    font-size: 50px;
-    font-weight: lighter;
-    padding: 0px; }
-  .scroll-page .secondary {
-    margin: 0;
-    font-size: 200px;
-    font-weight: lighter; }
-  .has-header p {
-    font-size: 1.3em; } }
+.action-sheet-group.action-sheet-options button {
+  text-align: center !important; }
 
-@media (min-height: 700px) {
+.overflow-scroll {
+  overflow-y: hidden; }
+
+@media (max-height: 440px) and (orientation: landscape) {
   .scroll-page .primary {
-    margin: 0;
-    font-size: 90px;
-    font-weight: lighter; }
+    font-size: 2em !important;
+    margin: 0 auto !important; }
   .scroll-page .secondary {
     margin: 0;
-    font-size: 300px;
+    font-size: 16em;
+    font-weight: lighter;
+    position: fixed;
+    left: 30px; }
+  .weatherIcon {
+    position: fixed;
+    left: 4.2em;
+    top: 35%;
+    height: 2.4em;
+    font-size: 2.0em; }
+  .info {
+    position: fixed;
+    right: 0px;
+    margin: auto;
+    top: 35%;
+    width: 331px;
+    font-size: 19px;
+    line-height: 1.3em; }
+  .col {
+    padding: 0px !important; }
+  .row {
+    padding: 0px; }
+  .iconoDiario {
+    font-size: 30px; }
+  .porcentajeIconoDiario {
+    padding-left: 26px;
+    top: -20.4px; } }
+
+@media (min-height: 550px) {
+  .scroll-page .primary {
+    margin: 0;
+    font-size: 45px;
+    font-weight: lighter;
+    padding: 0.8em 0.8em 0 0.8em; }
+  .scroll-page .secondary {
+    margin: 0;
+    font-size: 190px;
     font-weight: lighter; }
+  .porcentajeIconoDiario {
+    float: left;
+    padding-left: 27px;
+    top: -28px; }
   .has-header p {
-    font-size: 1.6em; } }
+    font-size: 1.3em; }
+  .row {
+    padding: 0px !important; }
+  .padding {
+    padding: 0px !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important; } }
+
+@media (min-width: 900px) and (min-height: 700px) {
+  .view {
+    max-width: 900px;
+    margin: 0 auto; }
+  .scroll-page.center {
+    max-width: 900px; }
+  .bar .title {
+    max-width: 900px; } }
+
+/*# sourceMappingURL=style.css.map */

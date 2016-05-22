@@ -1,21 +1,24 @@
-<ion-view view-title="Settings">
+<ion-view view-title="Configuración">
   <ion-content>
     <ion-list>
       <ion-item class="item-divider">Unidades</ion-item>
-      <ion-radio ng-model="st.settings.units" ng-value="'us'">Imperial (Fahrenheit)</ion-radio>
-      <ion-radio ng-model="st.settings.units" ng-value="'si'">Metrico (Celsius)</ion-radio>
+      <ion-radio ng-model="st.settings.units" name="a" ng-value="'si'" ng-change="st.guardaConfig()">Sistema Internacional (Métrico)</ion-radio>
+      <ion-radio ng-model="st.settings.units" name="a" ng-value="'us'" ng-change="st.guardaConfig()">Sistema Anglosajón (Imperial)</ion-radio>
+      <ion-item class="item-divider">Tipo icono</ion-item>
+      <ion-radio ng-model="st.settings.icono" name="b" ng-value="'animado'" ng-change="st.guardaConfig()">Icono animado</ion-radio>
+      <ion-radio ng-model="st.settings.icono" name="b" ng-value="'ionic'" ng-change="st.guardaConfig()">Icono Ionic</ion-radio>
       <div class="item item-divider">Dias de Pronóstico<span class="badge badge-dark">{{settings.days}}</span></div>
       <div class="item range range-positive">
-        2 <input type="range" name="days" ng-model="st.settings.days" min="2" max="8" value="8"> 8
+        2 <input type="range" name="days" ng-model="st.settings.days" min="2" max="8" value="8" ng-change="st.guardaConfig()"> 8
       </div>
       <div class="item item-button-right">Favoritos <button class="button button-small" ng-click="st.canDelete = !st.canDelete">{{st.canDelete ? 'editable' : 'bloqueado'}}</button></div>
     </ion-list>
+
     <ion-list show-delete="st.canDelete">
       <ion-item ng-repeat="location in st.locations">
         <ion-delete-button class="ion-minus-circled" ng-click="st.remove($index)"></ion-delete-button>
         {{location.city}}
       </ion-item>
     </ion-list>
-    <p class="padding">Información del clima powered by <a href="https://developer.forecast.io/docs/v2">Forecast.io</a> y geocoding powered by <a href="https://developers.google.com/maps/documentation/geocoding/">Google</a>.</p>
   </ion-content>
 </ion-view>

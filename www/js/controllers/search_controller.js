@@ -1,8 +1,8 @@
 angular.module('App')
 .controller('SearchController', SearchController);
-SearchController.$inject=['$scope','$log','$timeout','$ionicPopup','geocodeService'];
+SearchController.$inject=['$scope','$log','$timeout','$ionicPopup','$ionicLoading','geocodeService','cordovaService','$cordovaKeyboard'];
 
-function SearchController($scope, $log, $timeout, $ionicPopup, geocodeService) {
+function SearchController($scope, $log, $timeout, $ionicPopup, $ionicLoading, geocodeService, cordovaService, $cordovaKeyboard) {
   var vm=this;
   vm.busqueda = '';
   vm.bloqueo=false;
@@ -12,9 +12,22 @@ function SearchController($scope, $log, $timeout, $ionicPopup, geocodeService) {
     vm.esAndroid=ionic.Platform.isAndroid();
   }
 
+  vm.loadingOpen = function() {
+    $ionicLoading.show({
+      templateUrl: '../views/loadingIonic.html',
+      duration: 10000
+    });
+  };
+  vm.loadingClose = function(){
+    $timeout(function () {
+      $ionicLoading.hide();
+    }, 2500);
+  };
+
+
   vm.onclickInput=function(){
     vm.busqueda='';
-    vm.search(0);
+    vm.buscar(0);
   }
 
   /**
@@ -31,11 +44,11 @@ function SearchController($scope, $log, $timeout, $ionicPopup, geocodeService) {
   };
 
   /**
-  * [search description]
+  * [buscar description]
   * @param  {number} tiempo tiempo de respuesta para llamada al servicio. si es 0 es desde el boton, sino, mediante directiva on-change
-  * @return {object} vm.results    contiene la dirección que se mostrará en la vista.
+  * @return {object} vm.resultadoBusqueda    contiene la dirección que se mostrará en la vista.
   */
-  vm.search = function (tiempo) {
+  vm.buscar = function (tiempo) {
     if(vm.bloqueo===true){
       return;
     }
@@ -43,20 +56,61 @@ function SearchController($scope, $log, $timeout, $ionicPopup, geocodeService) {
     $timeout(function () {
       vm.bloqueo=false;
       var busqueda=vm.busqueda;
+      if(busqueda.length<1){
+        vm.resultadoBusqueda='';
+        return;
+      }
       if( busqueda.indexOf(',')===-1 && busqueda.length>1){
         busqueda+=',es';
       }
 
       //llama a servicio geocode
       geocodeService.getGeocode(busqueda).then(function(response){
-        vm.results=response.results;
-        if(angular.isUndefined(vm.results)){
+        vm.resultadoBusqueda=response.results;
+        if(angular.isUndefined(vm.resultadoBusqueda)){
           angular.element('#upload').trigger('click');
           vm.alertPopup('houston','Ups, no nos llegan datos, inténtalo más tarde');
         }
       });
 
     }, tiempo);
+  };
+
+  vm.geoLocaliza=function(){
+    vm.busqueda='';
+    try {
+      $cordovaKeyboard.close();
+      vm.isVisible = $cordovaKeyboard.isVisible();
+    } catch (e) {
+      $log.debug('cordovaKeyboard error');
+      vm.isVisible = true;
+    }
+
+    $scope.$watch('isVisible', function(newValue, oldValue) {
+      if((newValue===false && oldValue===true) || angular.isUndefined(newValue)){
+        vm.loadingOpen();
+        cordovaService.geolocation().then(function(response){
+          var result='{'+response.latitude+','+response.longitude + '}';
+          if(response!==''){
+            vm.busqueda=result;
+            vm.buscar(0);
+          }else{
+            $log.debug('geoLocaliza: sin datos');
+          }
+
+        }).catch(function(e){
+          console.log('geoLocaliza error', e);
+        }).finally(function(){
+          vm.loadingClose();
+        });
+      }
+    });
 
   };
+
+  ionic.Platform.ready(function(){
+    vm.geoLocaliza();
+  });
+
+  return vm;
 }

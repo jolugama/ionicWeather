@@ -1,20 +1,37 @@
 angular.module('App')
 .factory('geocodeService', GeocodeService);
-GeocodeService.$inject=['$http','$log'];
+GeocodeService.$inject=['$http','$q','$log'];
 
 
-function GeocodeService($http,$log){
+function GeocodeService($http,$q,$log){
   var vm=this;
   vm.getGeocode=function(busqueda){
-    $log.debug('rest geocode');
-    return $http.get('https://maps.googleapis.com/maps/api/geocode/json', {params: {address: busqueda}})
-    .then(function(response){
-      return response.data;
-    })
-    .catch(function(error) {
-      $log.error(error);
-      return error;
-    });
+    var defer = $q.defer();
+    var promise = defer.promise;
+    if(busqueda.indexOf('{')===0 && busqueda.indexOf('}')>5){ //si vienen los datos por lat o lon
+      var latLon=busqueda.substr(1, busqueda.length-2);
+
+      $http.get('https://maps.googleapis.com/maps/api/geocode/json', {params: {latlng: latLon}, key: 'AIzaSyD_kpKUxOoKJBDfr7FtCuTJhkJBm0o71Ok'})
+      .then(function(response){
+        defer.resolve(response.data);
+      })
+      .catch(function(err) {
+        $log.error(err);
+        defer.reject(err);
+      });
+    }else{
+      $http.get('https://maps.googleapis.com/maps/api/geocode/json', {params: {address: busqueda}, key: 'AIzaSyD_kpKUxOoKJBDfr7FtCuTJhkJBm0o71Ok'})
+      .then(function(response){
+        defer.resolve(response.data);
+      })
+      .catch(function(err) {
+        $log.error(err);
+        defer.reject(err);
+      });
+    }
+    return promise;
   };
+
+  
   return vm;
 }

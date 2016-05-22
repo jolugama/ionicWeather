@@ -3,15 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('App', ['ionic','ngCordova','ngAnimate','cgBusy'])
-.value('cgBusyDefaults',{
-  message:'Cargando...',
-  backdrop: false,
-  templateUrl: '../views/loading.html',
-  delay: 0,
-  minDuration: 700,
-  wrapperClass: 'loading'
-})
+angular.module('App', ['ionic','ngCordova','ngAnimate'])
 .config(function ($stateProvider, $urlRouterProvider) {
 
 
@@ -69,7 +61,8 @@ angular.module('App', ['ionic','ngCordova','ngAnimate','cgBusy'])
   var Settings = {
     units: 'si',
     days: 8,
-    lang:'es'
+    lang:'es',
+    icono:'animado'
   };
   return Settings;
 })

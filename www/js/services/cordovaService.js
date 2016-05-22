@@ -1,20 +1,24 @@
 angular.module('App')
 .factory('cordovaService',cordovaService);
-cordovaService.$inject=['$http','$log'];
+cordovaService.$inject=['$q','$cordovaGeolocation','$log'];
 
-function cordovaService($http,$log){
+function cordovaService($q,$cordovaGeolocation,$log){
   var vm=this;
-  vm.getForecast=function(stateParams,settings){
-    return $http.get('/api/forecast/' + stateParams.lat + ',' + stateParams.lng, {params: {units: settings.units, lang: settings.lang}})
-    .then(function(response){
-      $log.debug('rest forecast',response.data);
-      return response.data;
-    })
-    .catch(function(error) {
-      $log.error(error);
-      return error;
+  
+  vm.geolocation=function(){
+    var defer = $q.defer();
+    var promise = defer.promise;
+    var posOptions = {timeout: 20000, enableHighAccuracy: true};
+    $cordovaGeolocation.getCurrentPosition(posOptions).then(function (response) {
+      $log.debug('rest geolocation',response.coords);
+      defer.resolve(response.coords);
+    }).catch(function(err){
+      $log.error(err);
+      defer.reject(err);
     });
-
+    return promise;
   };
+
+
   return vm;
 }

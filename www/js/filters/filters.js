@@ -62,6 +62,28 @@ angular.module('App')
     }
   };
 })
+.filter('viento', function(Settings){
+  return function(n){
+    var value = Math.round(n);
+    if(Settings.units==='si'){
+      value+='m/s';
+    }else{
+      value+='millas/hora';
+    }
+    return  value;
+  };
+})
+.filter('visibilidad', function(Settings){
+  return function(n){
+    var value = Math.round(n);
+    if(Settings.units==='si'){
+      value+='km';
+    }else{
+      value+='millas';
+    }
+    return  value;
+  };
+})
 
 .filter('icons', function () {
   var map = {
@@ -78,5 +100,5 @@ angular.module('App')
   };
   return function (icon) {
     return map[icon] || '';
-  }
+  };
 })

@@ -10,7 +10,10 @@
   <!-- compiled css output -->
   <link href="css/ionic.app.css" rel="stylesheet">
   <link href="lib/angular-busy/dist/angular-busy.min.css" rel="stylesheet">
+  <link href="css/weather.css" rel="stylesheet">
   <link href="css/style.css" rel="stylesheet">
+
+
 
   <!-- ionic/angularjs js -->
   <script src="lib/ionic/js/ionic.bundle.js"></script>
@@ -19,6 +22,7 @@
 
   <!-- cordova script (this will be a 404 during development) -->
   <script src="cordova.js"></script>
+
 
   <!-- libraries -->
   <script src="lib/moment/min/moment.min.js"></script>
@@ -34,11 +38,13 @@
   <script src="js/services/geocode_service.js"></script>
   <script src="js/services/forecast_service.js"></script>
   <script src="js/services/ubicaciones_service.js"></script>
+  <script src="js/services/cordovaService.js"></script>
   <script src="js/filters/filters.js"></script>
   <script src="js/directives/directives.js"></script>
   <script src="js/controllers/search_controller.js"></script>
   <script src="js/controllers/settings_controller.js"></script>
   <script src="js/controllers/weather_controller.js"></script>
+
 
 </head>
 <body ng-app="App" class="platform-android">
@@ -47,7 +53,7 @@
 
     <ion-side-menu-content>
       <!-- barra cabecera  -->
-      <ion-nav-bar class="bar-royal">
+      <ion-nav-bar class="bar-royal" align-title="center">
         <ion-nav-buttons side="left">
           <button class="button button-clear" menu-toggle="left"><span class="icon ion-navicon"></span></button>
         </ion-nav-buttons>
@@ -65,7 +71,7 @@
         <ion-list>
           <ion-item class="item-icon-left" ui-sref="search" menu-close=""><span class="icon ion-search"></span> Buscar Ciudad</ion-item>
           <ion-item class="item-icon-left" ui-sref="settings" menu-close=""><span class="icon ion-ios-cog"></span> Configuracion</ion-item>
-          <ion-item  class="item-divider">Favoritos</ion-item>
+          <ion-item class="item-divider">Favoritos</ion-item>
           <span ng-if="m.esAndroid">
             <ion-item class="item-icon-left" ui-sref="weather2({city: ubicacion.city, lat: ubicacion.lat, lng: ubicacion.lng})" ui-sref-opts="{reload: true}" menu-close="" ng-repeat="ubicacion in m.ubicaciones"><span class="icon ion-ios-location"></span> {{ubicacion.city}}</ion-item>
           </span>
