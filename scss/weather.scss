@@ -6,13 +6,13 @@ $boxShadow2: rgba(100,100,100,0.2);
 $colorRelampago: rgb(237, 217, 32);
 
 
-
+$interaccion: 10;
 
 
 .weatherIcon {
 
   position: relative;
-  margin: 1em auto 2em auto;
+  margin: 1em auto 1.9em auto;
 
   //width: 12em;
   height: 7em;
@@ -65,7 +65,7 @@ $colorRelampago: rgb(237, 217, 32);
   2.0625em 0.9375em 0 -0.5625em $colorIcono;
   opacity: 0.3;
   transform: scale(0.5) translate(6em, -3em);
-  animation: cloud 4s linear infinite;
+  animation: cloud 4s linear $interaccion;
 
 }
 .cloud:nth-child(2):after { background: $colorIcono; }
@@ -80,7 +80,7 @@ $colorRelampago: rgb(237, 217, 32);
   background: currentColor;
   border-radius: 50%;
   box-shadow: 0 0 0 0.375em $colorIcono;
-  animation: spin 12s infinite linear;
+  animation: spin 12s $interaccion linear;
   color: yellow;
 }
 .moon {
@@ -159,7 +159,7 @@ $colorRelampago: rgb(237, 217, 32);
   -0.875em 1.125em 0 -0.125em $boxShadow1,
   -1.375em -0.125em 0 $boxShadow1;
   opacity:0;
-  animation: rain 3s cubic-bezier(0,.46,.66,1.07) infinite;
+  animation: rain 3s cubic-bezier(0,.46,.66,1.07) $interaccion;
 
 }
 
@@ -190,7 +190,7 @@ $colorRelampago: rgb(237, 217, 32);
   -0.875em 1.125em 0 -0.125em $boxShadow1,
   -1.375em -0.125em 0 $boxShadow1;
   opacity:0;
-  animation: rain2 3s ease-out infinite;
+  animation: rain2 3s ease-out $interaccion;
   animation-delay: 1.5s;
 
 
@@ -203,7 +203,7 @@ $colorRelampago: rgb(237, 217, 32);
   margin: -0.25em 0 0 -0.125em;
   color: rgba(255, 237, 0, 0.64);
   opacity: 0.3;
-  animation: lightning 2s linear infinite;
+  animation: lightning 2s linear $interaccion;
 }
 .bolt:nth-child(2) {
   width: 0.5em;
@@ -211,7 +211,7 @@ $colorRelampago: rgb(237, 217, 32);
   margin: -1.75em 0 0 -1.875em;
   transform: translate(2.5em, 2.25em);
   opacity: 0.2;
-  animation: lightning 1.5s linear infinite;
+  animation: lightning 1.5s linear $interaccion;
 }
 .bolt:before,
 .bolt:after {
@@ -260,26 +260,26 @@ $colorRelampago: rgb(237, 217, 32);
   color: $colorIcono;
   list-height: 1em;
   opacity: 0.2;
-  animation: spin 8s linear infinite reverse;
+  animation: spin 8s linear $interaccion reverse;
 
 }
 .flake:after {
   margin: 0.125em 0 0 -1em;
   font-size: 1.5em;
   opacity: 0.4;
-  animation: spin 14s linear infinite;
+  animation: spin 14s linear $interaccion;
 }
 .flake:nth-child(2):before {
   margin: -0.5em 0 0 0.25em;
   font-size: 1.25em;
   opacity: 0.2;
-  animation: spin 10s linear infinite;
+  animation: spin 10s linear $interaccion;
 }
 .flake:nth-child(2):after {
   margin: 0.375em 0 0 0.125em;
   font-size: 2em;
   opacity: 0.4;
-  animation: spin 16s linear infinite reverse;
+  animation: spin 16s linear $interaccion reverse;
 }
 
 

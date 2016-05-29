@@ -1,6 +1,6 @@
 .weatherIcon {
   position: relative;
-  margin: 1em auto 2em auto;
+  margin: 1em auto 1.9em auto;
   height: 7em;
   font-size: 2em;
   /* control icon size here */
@@ -50,8 +50,8 @@
   opacity: 0.3;
   -webkit-transform: scale(0.5) translate(6em, -3em);
           transform: scale(0.5) translate(6em, -3em);
-  -webkit-animation: cloud 4s linear infinite;
-          animation: cloud 4s linear infinite; }
+  -webkit-animation: cloud 4s linear 10;
+          animation: cloud 4s linear 10; }
 
 .cloud:nth-child(2):after {
   background: #000; }
@@ -66,8 +66,8 @@
   background: currentColor;
   border-radius: 50%;
   box-shadow: 0 0 0 0.375em #000;
-  -webkit-animation: spin 12s infinite linear;
-          animation: spin 12s infinite linear;
+  -webkit-animation: spin 12s 10 linear;
+          animation: spin 12s 10 linear;
   color: yellow; }
 
 .moon {
@@ -143,8 +143,8 @@
   border-radius: 100% 0 60% 50% / 60% 0 100% 50%;
   box-shadow: 0.625em 0.875em 0 -0.125em rgba(100, 100, 100, 0.1), -0.875em 1.125em 0 -0.125em rgba(100, 100, 100, 0.1), -1.375em -0.125em 0 rgba(100, 100, 100, 0.1);
   opacity: 0;
-  -webkit-animation: rain 3s cubic-bezier(0, 0.46, 0.66, 1.07) infinite;
-          animation: rain 3s cubic-bezier(0, 0.46, 0.66, 1.07) infinite; }
+  -webkit-animation: rain 3s cubic-bezier(0, 0.46, 0.66, 1.07) 10;
+          animation: rain 3s cubic-bezier(0, 0.46, 0.66, 1.07) 10; }
 
 .rain2 {
   position: absolute;
@@ -169,8 +169,8 @@
   border-radius: 100% 0 60% 50% / 60% 0 100% 50%;
   box-shadow: 0.625em 0.875em 0 -0.125em rgba(100, 100, 100, 0.1), -0.875em 1.125em 0 -0.125em rgba(100, 100, 100, 0.1), -1.375em -0.125em 0 rgba(100, 100, 100, 0.1);
   opacity: 0;
-  -webkit-animation: rain2 3s ease-out infinite;
-          animation: rain2 3s ease-out infinite;
+  -webkit-animation: rain2 3s ease-out 10;
+          animation: rain2 3s ease-out 10;
   -webkit-animation-delay: 1.5s;
           animation-delay: 1.5s; }
 
@@ -181,8 +181,8 @@
   margin: -0.25em 0 0 -0.125em;
   color: rgba(255, 237, 0, 0.64);
   opacity: 0.3;
-  -webkit-animation: lightning 2s linear infinite;
-          animation: lightning 2s linear infinite; }
+  -webkit-animation: lightning 2s linear 10;
+          animation: lightning 2s linear 10; }
 
 .bolt:nth-child(2) {
   width: 0.5em;
@@ -191,8 +191,8 @@
   -webkit-transform: translate(2.5em, 2.25em);
           transform: translate(2.5em, 2.25em);
   opacity: 0.2;
-  -webkit-animation: lightning 1.5s linear infinite;
-          animation: lightning 1.5s linear infinite; }
+  -webkit-animation: lightning 1.5s linear 10;
+          animation: lightning 1.5s linear 10; }
 
 .bolt:before,
 .bolt:after {
@@ -242,29 +242,29 @@
   color: #000;
   list-height: 1em;
   opacity: 0.2;
-  -webkit-animation: spin 8s linear infinite reverse;
-          animation: spin 8s linear infinite reverse; }
+  -webkit-animation: spin 8s linear 10 reverse;
+          animation: spin 8s linear 10 reverse; }
 
 .flake:after {
   margin: 0.125em 0 0 -1em;
   font-size: 1.5em;
   opacity: 0.4;
-  -webkit-animation: spin 14s linear infinite;
-          animation: spin 14s linear infinite; }
+  -webkit-animation: spin 14s linear 10;
+          animation: spin 14s linear 10; }
 
 .flake:nth-child(2):before {
   margin: -0.5em 0 0 0.25em;
   font-size: 1.25em;
   opacity: 0.2;
-  -webkit-animation: spin 10s linear infinite;
-          animation: spin 10s linear infinite; }
+  -webkit-animation: spin 10s linear 10;
+          animation: spin 10s linear 10; }
 
 .flake:nth-child(2):after {
   margin: 0.375em 0 0 0.125em;
   font-size: 2em;
   opacity: 0.4;
-  -webkit-animation: spin 16s linear infinite reverse;
-          animation: spin 16s linear infinite reverse; }
+  -webkit-animation: spin 16s linear 10 reverse;
+          animation: spin 16s linear 10 reverse; }
 
 /* Animations */
 @-webkit-keyframes spin {

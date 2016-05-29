@@ -108,16 +108,61 @@
   overflow-y: hidden;
 }
 
-// .platform-android .action-sheet-cancel {
-//     display: block !important;
-//
-//
-//
-// }
-//
-// .action-sheet-group .button:first-child:last-child{
-//     text-align: center;
-//   }
+
+.boxAlarma{
+  position: absolute;
+  right: 0px;
+  margin-right: 10px;
+  margin-top: -60px;
+  width: 60px;
+  height: 60px;
+  padding-top: 16px;
+  padding-left: 4px;
+  border-radius: 34px;
+  background-color: rgba(119, 226, 25, 0.15);
+  border:3px solid rgba(87, 124, 7, 0.23);
+  box-shadow: 2px 4px 7px #666;
+
+  .iconoDiario {
+    font-size: 32px !important;
+  }
+}
+.boxAlarma:hover {
+  box-shadow: 1px 3px 6px #666;
+}
+.boxAlarma:active {
+  box-shadow: 1px 2px 16px #666;
+}
+
+.alertaActivada{
+  padding-top: 10px;
+  padding-left: 4px;
+  background-color: rgba(255, 0, 0, 0.4);
+  border:3px solid rgba(0, 0, 0, 0.4);
+  .iconoDiario {
+    font-size: 58px !important;
+  }
+}
+
+.menu{
+  .overflow-scroll {
+    overflow-y:scroll !important;
+  }
+}
+.config.overflow-scroll {
+  overflow-y:scroll !important;
+}
+
+.item-divider {
+  background-color: #C6C3FF;
+}
+
+
+//modal
+.barraModal{
+  font-size: 12px !important;
+}
+
 
 //par alos apaisados y moviles pequeñicos
 @media (max-height: 440px ) and (orientation: landscape) {
@@ -139,6 +184,9 @@
     top: 35%;
     height: 2.4em;
     font-size: 2.0em;
+  }
+  .carga{
+    display:none;
   }
   .info{
     position: fixed;
@@ -162,6 +210,9 @@
     padding-left: 26px;
     top: -20.4px;
   }
+  .boxAlarma {
+    margin-top: -25px;
+  }
 }
 
 @media (min-height: 550px)  {
@@ -169,7 +220,7 @@
     margin: 0;
     font-size: 45px;
     font-weight: lighter;
-    padding:0.8em 0.8em 0 0.8em;
+    padding:0.5em 0.8em 0 0.8em;
   }
   .scroll-page .secondary {
     margin: 0;

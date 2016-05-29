@@ -19,7 +19,7 @@
           </div>
           <div class="has-header" ng-show="w.carga">
             <h2 class="primary">{{w.forecast.currently.temperature | temperatura}}</h2>
-
+            <div class="boxAlarma" ng-class="{'alertaActivada':w.AlarmaIcono!=='info'}" ng-click="w.clickAlarma(w.resumenAlerta)"><span class="icon  iconoDiario" ng-class="w.AlarmaIcono | icons"></span></div>
 
             <div ng-if="w.settings.icono==='ionic'">
               <h2 class="secondary icon" ng-class="w.forecast.currently.icon | icons"></h2>

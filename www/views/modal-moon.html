@@ -1,0 +1,33 @@
+<ion-modal-view>
+  <ion-header-bar  class="bar-dark" >
+    <h1  class="title">Calendario solar</h1>
+    <button class="button button-clear" ng-click="hideModal()">Close</button>
+  </ion-header-bar>
+  <div class="bar bar-subheader">
+    <!-- dawn — sunrise — solar noon — sunset — dusk -->
+    <h2 class="title barraModal">
+      <div class="row">
+        <div class="col col-25"></div>
+        <div class="col">Salida</div>
+        <div class="col">Puesta</div>
+        <div class="col">F. Ilumin</div>
+        <div class="col">Si. abajo</div>
+
+      </div>
+    </h2>
+  </div>
+  <ion-content>
+    <div class="list">
+      <div  class="item text-center" collection-repeat="day in mimodal.chart">
+        <div class="row">
+          <div class="col" >{{day.rise | nombreMes}}:</div>
+          <div class="col ">{{day.rise | date:'H:mm' }}</div>
+            <div class="col">{{day.set | date:'H:mm' }}</div>
+          <div class="col">{{day.fraction | porcentaje }}</div>
+          <div class="col">{{day.phase | faseLuna }}</div>
+
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-modal-view>

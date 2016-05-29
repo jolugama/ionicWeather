@@ -1,4 +1,4 @@
-angular.module('App')
+angular.module('app')
 .directive('autoFocus', function($timeout) {  // auto-focus auto-focus-delay="500"
   function link($scope, $element, $attrs) {
     var dom = $element[0];

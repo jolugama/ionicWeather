@@ -1,8 +1,12 @@
-angular.module('App')
-.factory('forecastService',ForecastService);
-ForecastService.$inject=['$http','$q','$log'];
+(function() {
+  'use strict';
 
-function ForecastService($http,$q,$log){
+angular.module('app')
+.factory('forecastService',forecastService);
+forecastService.$inject=['$http','$q','$log'];
+
+/* @ngInject */
+function forecastService($http,$q,$log){
   var vm=this;
   vm.getForecast=function(stateParams,settings){
     var defer = $q.defer();
@@ -22,3 +26,5 @@ function ForecastService($http,$q,$log){
 
   return vm;
 }
+
+})();

@@ -1,13 +1,16 @@
 <ion-view view-title="Configuración">
-  <ion-content>
+  <ion-content class="config">
     <ion-list>
       <ion-item class="item-divider">Unidades</ion-item>
       <ion-radio ng-model="st.settings.units" name="a" ng-value="'si'" ng-change="st.guardaConfig()">Sistema Internacional (Métrico)</ion-radio>
       <ion-radio ng-model="st.settings.units" name="a" ng-value="'us'" ng-change="st.guardaConfig()">Sistema Anglosajón (Imperial)</ion-radio>
+      <ion-item class="item-divider">Idioma</ion-item>
+      <ion-radio ng-model="st.settings.lang" name="lang" ng-value="'es'" ng-change="st.guardaConfig()">Castellano</ion-radio>
+      <ion-radio ng-model="st.settings.lang" name="lang" ng-value="'en'" ng-change="st.guardaConfig()">Inglés</ion-radio>
       <ion-item class="item-divider">Tipo icono</ion-item>
       <ion-radio ng-model="st.settings.icono" name="b" ng-value="'animado'" ng-change="st.guardaConfig()">Icono animado</ion-radio>
       <ion-radio ng-model="st.settings.icono" name="b" ng-value="'ionic'" ng-change="st.guardaConfig()">Icono Ionic</ion-radio>
-      <div class="item item-divider">Dias de Pronóstico<span class="badge badge-dark">{{settings.days}}</span></div>
+      <div class="item item-divider">Días de Pronóstico<span class="badge badge-dark">{{st.settings.days}}</span></div>
       <div class="item range range-positive">
         2 <input type="range" name="days" ng-model="st.settings.days" min="2" max="8" value="8" ng-change="st.guardaConfig()"> 8
       </div>
