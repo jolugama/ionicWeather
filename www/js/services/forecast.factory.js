@@ -12,7 +12,7 @@ function forecastService($http,$q,$log){
     var defer = $q.defer();
     var promise = defer.promise;
     //upload https://api.forecast.io/forecast/fbff4e86f9ba7ea95551c176e59ddb03/ en lugar de /api/forecast/
-    $http.get('/api/forecast/' + stateParams.lat + ',' + stateParams.lng, {params: {units: settings.units, lang: settings.lang}}).then(function(response){
+    $http.get('https://api.forecast.io/forecast/fbff4e86f9ba7ea95551c176e59ddb03/' + stateParams.lat + ',' + stateParams.lng, {params: {units: settings.units, lang: settings.lang}}).then(function(response){
       $log.debug('rest forecast',response.data);
       defer.resolve(response.data);
     })

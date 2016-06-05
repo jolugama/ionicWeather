@@ -17,7 +17,9 @@
 
   <!-- ionic/angularjs js -->
   <script src="lib/ionic/js/ionic.bundle.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-i18n/1.5.3/angular-locale_es-es.js">
 
+  </script>
   <script src="lib/ngCordova/dist/ng-cordova.min.js"></script>
 
   <!-- cordova script (this will be a 404 during development) -->
@@ -29,8 +31,9 @@
   <script src="lib/moment/min/moment-with-locales.min.js"></script>
   <script src="lib/moment-timezone/builds/moment-timezone-with-data.min.js"></script>
   <script src="lib/suncalc/suncalc.js"></script>
+  <script src="lib2/mooncalc.js"></script>
   <script src="lib/angular-busy/dist/angular-busy.min.js"></script>
-  <script src='https://code.responsivevoice.org/responsivevoice.js'></script>
+  <script src="https://code.responsivevoice.org/responsivevoice.js"></script>
 
 
   <!-- your app's js -->
@@ -43,12 +46,15 @@
   <script src="js/services/ubicaciones.factory.js"></script>
   <script src="js/services/cordovaGeolocation.factory.js"></script>
   <script src="js/services/cordovaDeviceOrientation.factory.js"></script>
-  <script src=js/services/textToSpeech.factory.js></script>
-  <script src=js/services/sunCalc.factory.js></script>
+  <script src="js/services/textToSpeech.factory.js"></script>
+  <script src="js/services/sunCalc.factory.js"></script>
 
   <script src="js/filters/filters.js"></script>
 
   <script src="js/directives/directives.js"></script>
+  <script src="js/directives/faseLunar.directive.js"></script>
+  <script src="js/directives/iconos.directive.js"></script>
+
 
   <script src="js/controllers/menu.controller.js"></script>
   <script src="js/controllers/search.controller.js"></script>
@@ -57,13 +63,13 @@
 
 
 </head>
-<body ng-app="app" >
+<body ng-app="app">
   <!-- menú deslizante: permite un menu a la izq o derecha ser tocado o arrastrado al lado del contenedor principal. (el típico menu móvil) -->
   <ion-side-menus ng-cloak="">
 
     <ion-side-menu-content>
       <!-- barra cabecera  -->
-      <ion-nav-bar class="bar-royal" align-title="center">
+      <ion-nav-bar class="" align-title="center">
         <ion-nav-buttons side="left">
           <button class="button button-clear" menu-toggle="left"><span class="icon ion-navicon"></span></button>
         </ion-nav-buttons>

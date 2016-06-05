@@ -27,58 +27,7 @@
           <div class="boxAlarma" ng-class="{'alertaActivada':w.AlarmaIcono!=='info'}" ng-click="w.clickAlarma(w.resumenAlerta)"><span class="icon  iconoDiario" ng-class="w.AlarmaIcono | icons"></span></div>
 
 
-          <div ng-if="w.settings.icono==='ionic'">
-            <h2 class="secondary icon" ng-class="w.forecast.currently.icon | icons"></h2>
-          </div>
-          <div ng-if="w.settings.icono==='animado'">
-            <div ng-if="w.forecast.currently.icon==='clear-day'" class="weatherIcon">
-              <div class="sun">
-                <div class="rays"></div>
-              </div>
-            </div>
-
-            <div ng-if="w.forecast.currently.icon==='clear-night'" class="weatherIcon">
-              <div class="moon"></div>
-            </div>
-            <div ng-if="w.forecast.currently.icon==='rain'" class="weatherIcon">
-              <div class="cloud"></div>
-              <div class="rain"></div>
-              <div class="rain2"></div>
-            </div>
-            <div ng-if="w.forecast.currently.icon==='snow'" class="weatherIcon">
-              <div class="cloud"></div>
-              <div class="snow">
-                <div class="flake"></div>
-                <div class="flake"></div>
-              </div>
-            </div>
-            <div ng-if="w.forecast.currently.icon==='sleet'" class="weatherIcon">
-              <div class="cloud"></div>
-              <div class="rain"></div>
-            </div>
-            <div ng-if="w.forecast.currently.icon==='wind'" class="weatherIcon">
-
-            </div>
-            <div ng-if="w.forecast.currently.icon==='fog'" class="weatherIcon">
-
-            </div>
-            <div ng-if="w.forecast.currently.icon==='cloudy'" class="weatherIcon">
-              <div class="cloud"></div>
-              <div class="cloud"></div>
-            </div>
-            <div ng-if="w.forecast.currently.icon==='partly-cloudy-day'" class="weatherIcon">
-              <div class="cloud"></div>
-              <div class="sun">
-                <div class="rays"></div>
-              </div>
-            </div>
-            <div ng-if="w.forecast.currently.icon==='partly-cloudy-night'" class="weatherIcon">
-              <div class="cloud"></div>
-              <div class="moon"></div>
-            </div>
-          </div>
-
-
+          <icono-Tiempo tipo-icono="{{w.settings.icono}}" clima="{{w.forecast.currently.icon}}"> </icono-Tiempo>
 
 
           <div class="info" ng-show="w.carga">
@@ -112,15 +61,25 @@
         <div class="bar bar-dark">
           <h1 class="title">Datos del Clima</h1>
         </div>
-        <div class="list has-header">
-          <div class="item">Sol: {{w.forecast.daily.data[0].sunriseTime | timezone:w.forecast.timezone}}</div>
-          <div class="item">Ocaso: {{w.forecast.daily.data[0].sunsetTime | timezone:w.forecast.timezone}}</div>
 
-          <div ng-if="w.forecast.currently.visibility" class="item">Visibilidad: {{w.forecast.currently.visibility | visibilidad}} </div>
+
+        <div class="list has-header datosClima">
+          <div class="item">
+            Sol: salida {{w.forecast.daily.data[0].sunriseTime | timezone:w.forecast.timezone}} -
+            puesta {{w.forecast.daily.data[0].sunsetTime | timezone:w.forecast.timezone}}
+          </div>
+          <div class="item">
+            <fase-lunar  tamanio-luna="50"  fecha="{{w.fechaAhoraMismo}}"  lat="{{w.forecast.latitude}}" lng="{{w.forecast.longitude}}" title=""></fase-lunar>
+            <span>{{fase|trim|nombreFaseLunar}}</span>
+          </div>
+          <!-- <div class="item">Ocaso: {{w.forecast.daily.data[0].sunsetTime | timezone:w.forecast.timezone}}</div> -->
+
+          <div ng-if="w.forecast.currently.visibility" class="item">Visibilidad: {{w.forecast.currently.visibility | visibilidad}}</div>
           <div  ng-if="w.forecast.currently.humidity" class="item">Humedad: {{w.forecast.currently.humidity | porcentaje}}</div>
         </div>
-      </div>
 
+
+      </div>
     </div>
   </ion-scroll>
 </ion-content>

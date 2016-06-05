@@ -1,9 +1,6 @@
 (function() {
   'use strict';
 
-
-
-
   angular.module('app')
   .filter('timezone', function () {
     return function (input, timezone) {
@@ -27,12 +24,12 @@
     };
   })
 
-  .filter('nombreMes', function () {
+  .filter('diaMes', function () {
     return function (input) {
       if (input) {
         moment.locale('es');
         var time = moment(input);
-        return time.format('DD MMMM');
+        return time.format('DD MMM');
       }
       return '';
     };
@@ -55,32 +52,7 @@
       }
     };
   })
-  .filter('faseLuna', function () {
-    return function (n) {
-      if (n) {
-        var value = Math.round(n * 100);
-        var fase='';
-        if(value<3){
-          fase='New Moon';
-        }else if(value<10){
-          fase='Waxing Crescent';
-        }else if(value<26){
-          fase='First Quarter';
-        }else if(value<41){
-          fase='Waxing Gibbous';
-        }else if(value<51){
-          fase='Full Moon';
-        }else if(value<61){
-          fase='Waning Gibbous';
-        }else if(value<76){
-          fase='Last Quarter';
-        }else {
-          fase='Waning Crescent';
-        }
-        return fase;
-      }
-    };
-  })
+
   .filter('temperatura', function (settingsService) {
     return function (n) {
       if (n) {
@@ -140,5 +112,34 @@
     };
   })
 
+  .filter('redondeoMiles',function(){
+    return function(n){
+      return Math.round(n/100)*100;
+    };
+  })
+  .filter('trim', function () {
+    return function(value) {
+      if(!angular.isString(value)) {
+        return value;
+      }
+      return value.replace(/^\s+|\s+$/g, ''); // you could use .trim, but it's not going to work in IE<9
+    };
+  })
+
+  .filter('nombreFaseLunar', function () {
+    var map = {
+      'New Moon': 'Luna nueva',
+      'Waxing Crescent': 'Cuarto creciente',
+      'First Quarter': 'Primer cuarto',
+      'Waxing Gibbous' : 'Luna gibosa creciente',
+      'Full Moon': 'Luna llena',
+      'Waning Gibbous': 'Luna gibosa menguante',
+      'Waning Crescent': 'Cuarto menguante',
+      'Third Quarter':'Último cuarto'
+    };
+    return function (nombreLuna) {
+      return map[nombreLuna] || '';
+    };
+  })
 
 })();

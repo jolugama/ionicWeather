@@ -1,3 +1,27 @@
+$color0:rgba(#896beb, 0.90);
+$color1:rgba(#896beb, 0.70);
+$color2:rgba(#896beb, 0.65);
+$color3:rgba(#896beb, 0.45);
+$color4:rgba(#896beb, 0.20);
+$color5:rgba(#896beb, 0.15);
+$color6:rgba(#896beb, 0.02);
+$letrasColor1:#FFF;
+
+ion-header-bar{
+  background-color: $color1 !important;
+}
+.item .item-content.activated{
+    background-color: $color0 ;
+    border-color:$color1 ;
+    color: $letrasColor1;
+}
+.bar .title,.bar .buttons-left span, .bar .buttons-right span  {
+  color:$letrasColor1 !important;
+}
+.modal{
+  max-width: 800px;
+  margin: 0 auto;
+}
 .scroll-page .icon:before {
   margin-top:-13px;
   padding-right: 3px;
@@ -6,11 +30,19 @@
   margin-top: 0;
   padding: 0px;
 }
+
+.centradoVertical{
+  padding-top:14px;
+}
+
 .scroll-page .row:nth-of-type(odd) {
-  background: #fafafa;
+  background: $color5;
 }
 .scroll-page .row:nth-of-type(even) {
-  background: #f3f3f3;
+  background: $color6;
+}
+.item-radio input:checked + .radio-content .item-content{
+  background: $color5;
 }
 .scroll-page .wind-icon {
   display: inline-block;
@@ -22,7 +54,6 @@
 .scroll-page .has-header {
   position: relative;
 }
-
 
 
 .iconoDiario{
@@ -119,8 +150,8 @@
   padding-top: 16px;
   padding-left: 4px;
   border-radius: 34px;
-  background-color: rgba(119, 226, 25, 0.15);
-  border:3px solid rgba(87, 124, 7, 0.23);
+  background-color: $color4;
+  border:3px solid $color5;
   box-shadow: 2px 4px 7px #666;
 
   .iconoDiario {
@@ -137,8 +168,8 @@
 .alertaActivada{
   padding-top: 10px;
   padding-left: 4px;
-  background-color: rgba(255, 0, 0, 0.4);
-  border:3px solid rgba(0, 0, 0, 0.4);
+  background-color: $color2;
+  border:3px solid $color3;
   .iconoDiario {
     font-size: 58px !important;
   }
@@ -154,15 +185,39 @@
 }
 
 .item-divider {
-  background-color: #C6C3FF;
+  background-color: $color3;
 }
 
 
 //modal
 .barraModal{
   font-size: 12px !important;
+  line-height: 20px !important;
+  margin: 0px !important;
+}
+.bar{
+  border-top:0px !important;
+  border-bottom:0px !important;
+}
+.row.titulo .col{
+  font-weight: 900;
+}
+.itemArreglo{
+  top:50px !important;
 }
 
+.superLunaRow{
+  background-color: rgba(255, 28, 4, 0.21) !important;
+}
+.superLunaCol{
+  font-weight: bold;
+  color:rgba(255, 4, 4, 0.8);
+}
+
+//3º pantalla
+.datosClima .item{
+  text-align: center;
+}
 
 //par alos apaisados y moviles pequeñicos
 @media (max-height: 440px ) and (orientation: landscape) {
@@ -179,9 +234,9 @@
   }
 
   .weatherIcon {
-    position: fixed;
+    position: absolute;
     left: 4.2em;
-    top: 35%;
+    margin-top: 100px;
     height: 2.4em;
     font-size: 2.0em;
   }
@@ -189,11 +244,9 @@
     display:none;
   }
   .info{
-    position: fixed;
-    right: 0px;
-    margin: auto;
-    top: 35%;
-    width: 331px;
+    position: absolute;
+    right: 25px;
+    margin-top: 65px;
     font-size: 19px;
     line-height: 1.3em;
   }

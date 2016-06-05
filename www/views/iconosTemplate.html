@@ -1,0 +1,50 @@
+<div ng-if="tipoIcono==='ionic'">
+  <h2 class="secondary icon" ng-class="clima | icons"></h2>
+</div>
+<div ng-if="tipoIcono==='animado'">
+  <div ng-if="clima==='clear-day'" class="weatherIcon">
+    <div class="sun">
+      <div class="rays"></div>
+    </div>
+  </div>
+
+  <div ng-if="clima==='clear-night'" class="weatherIcon">
+    <div class="moon"></div>
+  </div>
+  <div ng-if="clima==='rain'" class="weatherIcon">
+    <div class="cloud"></div>
+    <div class="rain"></div>
+    <div class="rain2"></div>
+  </div>
+  <div ng-if="clima==='snow'" class="weatherIcon">
+    <div class="cloud"></div>
+    <div class="snow">
+      <div class="flake"></div>
+      <div class="flake"></div>
+    </div>
+  </div>
+  <div ng-if="clima==='sleet'" class="weatherIcon">
+    <div class="cloud"></div>
+    <div class="rain"></div>
+  </div>
+  <div ng-if="clima==='wind'" class="weatherIcon">
+
+  </div>
+  <div ng-if="clima==='fog'" class="weatherIcon">
+
+  </div>
+  <div ng-if="clima==='cloudy'" class="weatherIcon">
+    <div class="cloud"></div>
+    <div class="cloud"></div>
+  </div>
+  <div ng-if="clima==='partly-cloudy-day'" class="weatherIcon">
+    <div class="cloud"></div>
+    <div class="sun">
+      <div class="rays"></div>
+    </div>
+  </div>
+  <div ng-if="clima==='partly-cloudy-night'" class="weatherIcon">
+    <div class="cloud"></div>
+    <div class="moon"></div>
+  </div>
+</div>

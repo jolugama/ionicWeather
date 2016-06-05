@@ -6,21 +6,23 @@
   <div class="bar bar-subheader">
     <!-- dawn — sunrise — solar noon — sunset — dusk -->
     <h2 class="title barraModal">
-      <div class="row">
-        <div class="col col-25"></div>
-        <div class="col">Alba</div>
-        <div class="col">Salida</div>
-        <div class="col">Mediodía</div>
-        <div class="col">Puesta</div>
-        <div class="col ">Oscuridad</div>
+        <div  class="item text-center">
+      <div class="row titulo">
+        <div class="col"></div>
+        <div class="col" title='Alba / Dawn'>/</div>
+        <div class="col" title="Salida / Sunrise">_</div>
+        <div class="col" title="Mediodía / SolarNoon">|</div>
+        <div class="col" title="Puesta / Sunset">_</div>
+        <div class="col" title="Oscuridad / Dusk">\</div>
       </div>
+        </div>
     </h2>
   </div>
   <ion-content>
     <div class="list">
-      <div class="item text-center" collection-repeat="day in mimodal.chart">
+      <div class="item text-center itemArreglo" collection-repeat="day in mimodal.datos">
         <div class="row">
-          <div class="col" >{{day.sunrise | nombreMes}}:</div>
+          <div class="col" >{{day.sunrise | diaMes}}</div>
           <div class="col ">{{day.dawn | date:'H:mm' }}</div>
           <div class="col">{{day.sunrise | date:'H:mm' }}</div>
           <div class="col">{{day.solarNoon | date:'H:mm' }}</div>

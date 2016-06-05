@@ -19,17 +19,27 @@
 
       var days = [];
       var day = Date.now();
+        day -= 1000 * 60 * 60 * 24;
       for (var i = 0; i < 365; i++) {
         day += 1000 * 60 * 60 * 24;
         if(tipo==='sol'){
           days.push(SunCalc.getTimes(day, lat, lon));
         }else if(tipo==='luna'){
           days.push(SunCalc.getMoonTimes(day, lat, lon));
+
+          days[days.length-1].fecha=day; //añado la fecha al array
+
           var nuevoObjeto = angular.extend({}, days[days.length-1], SunCalc.getMoonIllumination(day));
           days[days.length-1]=nuevoObjeto;
-        //  debugger;
 
+          var nuevoObjeto2 = angular.extend({}, days[days.length-1], MoonCalc.getMoonPosition(new Date(day),lat,lon));
+          days[days.length-1]=nuevoObjeto2;
 
+          days[days.length-1].superLuna=parseInt(days[days.length-1].distance)<365000 ? true : "";
+          days[days.length-1].tamanio=days[days.length-1].superLuna===true ? 55 : 40;
+
+          //por si no hay rise, la hora sera las 00: 00;
+          days[days.length-1].horaLuna=days[days.length-1].rise ? days[days.length-1].rise : new Date(days[days.length-1].fecha);
 
         }
       }

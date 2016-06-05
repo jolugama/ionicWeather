@@ -54,6 +54,7 @@
       vm.refrescar = function() {
         vm.loadingOpen();
         $log.debug('llamando al refresco');
+        vm.fechaAhoraMismo=new Date();
         //llama a servicio forecast
         forecastService.getForecast(vm.params,vm.settings).then(function(response){
           vm.alertaHoras(response.hourly.data);
@@ -166,6 +167,7 @@
       }, true);
 
 
+
       var barHeight = angular.element(document).find('ion-header-bar')[0].clientHeight;
       vm.getWidth = function () {
         return $window.innerWidth + 'px';
@@ -204,8 +206,12 @@
           }
         });
       };
-
+      
       $scope.mimodal={};
+      $scope.mimodal.params={
+        lat: vm.params.lat,
+        lng: vm.params.lng
+      };
       vm.showModal = function (tipo) {
         var plantilla='';
         if(tipo==='sol'){
@@ -218,12 +224,12 @@
         }).then(function (modal) {
           vm.modal = modal;
           if(tipo==='sol'){
-            $scope.mimodal.chart =sunCalService.calcula(tipo,vm.params.lat, vm.params.lng);
+            $scope.mimodal.datos =sunCalService.calcula(tipo,vm.params.lat, vm.params.lng);
           }else if(tipo==='luna'){
-            $scope.mimodal.chart =sunCalService.calcula(tipo,vm.params.lat, vm.params.lng);
+            $scope.mimodal.datos =sunCalService.calcula(tipo,vm.params.lat, vm.params.lng);
           }
 
-          console.log('chart', $scope.mimodal.chart);
+          console.log('chart', $scope.mimodal.datos);
           vm.modal.show();
         });
       };
