@@ -15,43 +15,52 @@
       pulling-text="Tira para refrescar ..."
       on-refresh="w.refrescar()">
     </ion-refresher>
-    <div ng-style="{height: w.getTotalHeight()}">
 
+    <div ng-style="{height: w.getTotalHeight()}">
+      <div  ng-show="w.ko" ng-class="{'ko':w.ko===true}" class="scroll-page center" ng-style="{width: w.getWidth(), height: w.getHeight()}"></div>
       <!-- 1ª pantalla.  -->
-      <div class="scroll-page center" ng-style="{width: w.getWidth(), height: w.getHeight()}">
+      <div ng-hide="w.ko" class="scroll-page center" ng-style="{width: w.getWidth(), height: w.getHeight()}">
         <div class="bar bar-dark">
           <h1 class="title">{{w.params.city.split(',')[0]}}, {{w.params.city.split(',')[1]}}. {{w.params.city.split(',')[2]}}</h1>
         </div>
         <div class="has-header" ng-show="w.carga">
+          <button class="button button-full  botonAlarma" ng-class="{'botonAlarmado':w.AlarmaIcono[0]!='info', 'botonInfo':w.AlarmaIcono[0]=='info'}" ng-click="w.clickAlarma(w.resumenAlerta)">
+            <div class="icon  iconoDiario" ng-repeat="alarma in w.AlarmaIcono" ng-class="alarma | icons"></div>
+          </button>
           <h2 class="primary ">{{w.forecast.currently.temperature | temperatura}}</h2>
-          <div class="boxAlarma" ng-class="{'alertaActivada':w.AlarmaIcono!=='info'}" ng-click="w.clickAlarma(w.resumenAlerta)"><span class="icon  iconoDiario" ng-class="w.AlarmaIcono | icons"></span></div>
+          <!-- <div class="boxAlarma" ng-class="{'alertaActivada':w.AlarmaIcono[0]!=='info'}" ng-click="w.clickAlarma(w.resumenAlerta)" > -->
+          <!-- </div> -->
 
 
-          <icono-Tiempo tipo-icono="{{w.settings.icono}}" clima="{{w.forecast.currently.icon}}"> </icono-Tiempo>
+
+          <div icono-Tiempo tipo-icono="{{w.settings.icono}}" clima="{{w.forecast.currently.icon}}"> </div>
 
 
           <div class="info" ng-show="w.carga">
             <p  ng-class="w.forecast ? '' : 'ocultar'">{{w.forecast.currently.summary || '_'}}</p>
-            <p  ng-class="w.forecast ? '' : 'ocultar'">Temperatura Min/Max: {{w.forecast.daily.data[0].temperatureMin | temperatura}} / {{w.forecast.daily.data[0].temperatureMax | temperatura}} </p>
-            <p  ng-class="w.forecast ? '' : 'ocultar'">Sensación térmica: {{w.forecast.currently.apparentTemperature | temperatura}}</p>
-            <p  ng-class="w.forecast ? '' : 'ocultar'">Viento: {{w.forecast.currently.windSpeed |  viento}}  <span class="icon wind-icon ion-ios7-arrow-thin-up" ng-style="{transform: 'rotate(' + w.forecast.currently.windBearing + 'deg)'}"></span></p>
+            <p  ng-class="w.forecast ? '' : 'ocultar'">Temp. Min/Max: {{w.forecast.daily.data[0].temperatureMin | temperatura}} / {{w.forecast.daily.data[0].temperatureMax | temperatura}} </p>
+            <!-- <p  ng-class="w.forecast ? '' : 'ocultar'">Sensación térmica: {{w.forecast.currently.apparentTemperature | temperatura}}</p> -->
+            <p  ng-class="w.forecast ? '' : 'ocultar'">{{w.forecast.currently.windSpeed |  descViento}}: {{w.forecast.currently.windSpeed |  viento}}  <span class="icon wind-icon ion-ios7-arrow-thin-up" ng-style="{transform: 'rotate(' + w.forecast.currently.windBearing + 'deg)'}"></span></p>
+            <p ng-if="w.forecast.currently.visibility" >Visibilidad: {{w.forecast.currently.visibility | visibilidad}}</p>
+            <p  ng-if="w.forecast.currently.humidity" >Humedad: {{w.forecast.currently.humidity | porcentaje}}</p>
+
           </div>
         </div>
       </div>
 
       <!-- 2ª pantalla.  -->
-      <div class="scroll-page" ng-style="{width: w.getWidth(), height: w.getHeight()}">
+      <div ng-hide="w.ko" class="scroll-page" ng-style="{width: w.getWidth(), height: w.getHeight()}">
         <div class="bar bar-dark">
           <h1 class="title">Predicción {{w.settings.days}} días</h1>
         </div>
         <div class="has-header">
-          <p class="padding">{{w.forecast.daily.summary}}</p>
-          <div class="row" ng-repeat="day in w.forecast.daily.data | limitTo:w.settings.days">
+          <p class="padding sumario">{{w.forecast.daily.summary}}</p>
+          <div class="row fila" ng-repeat="day in w.forecast.daily.data | limitTo:w.settings.days">
             <!-- <div class="col-25">{{day.time + '000' | date:'EEEE'}}</div> -->
-            <div class="col-40 margenIzq"> {{day.time | diaSemana:w.forecast.timezone}}</div>
-            <div class="col"><span class="icon  iconoDiario" ng-class="day.icon | icons"></span><sup class="porcentajeIconoDiario">{{day.precipProbability | porcentajeRedondeo}}</sup></div>
-            <div class="col">{{day.temperatureMin | temperatura}}</div>
-            <div class="col">{{day.temperatureMax | temperatura}}</div>
+            <div class="col-40 margenIzq col-center"> {{day.time | diaSemana:w.forecast.timezone}}</div>
+            <div class="col col-center"><span class="icon  iconoDiario" ng-class="day.icon | icons"></span><sup class="porcentajeIconoDiario">{{day.precipProbability | porcentajeRedondeo}}</sup></div>
+            <div class="col col-center">{{day.temperatureMin | temperatura}}</div>
+            <div class="col col-center">{{day.temperatureMax | temperatura}}</div>
           </div>
         </div>
       </div>
@@ -59,28 +68,35 @@
       <!-- 3ª pantalla.  -->
       <div class="scroll-page" ng-style="{width: w.getWidth(), height: w.getHeight()}">
         <div class="bar bar-dark">
-          <h1 class="title">Datos del Clima</h1>
+          <h1 class="title">Posición actual - Sol y Luna</h1>
         </div>
 
 
         <div class="list has-header datosClima">
           <div class="item">
-            Sol: salida {{w.forecast.daily.data[0].sunriseTime | timezone:w.forecast.timezone}} -
-            puesta {{w.forecast.daily.data[0].sunsetTime | timezone:w.forecast.timezone}}
-          </div>
-          <div class="item">
-            <fase-lunar  tamanio-luna="50"  fecha="{{w.fechaAhoraMismo}}"  lat="{{w.forecast.latitude}}" lng="{{w.forecast.longitude}}" title=""></fase-lunar>
-            <span>{{fase|trim|nombreFaseLunar}}</span>
-          </div>
-          <!-- <div class="item">Ocaso: {{w.forecast.daily.data[0].sunsetTime | timezone:w.forecast.timezone}}</div> -->
+            <div class="icon ion-android-sunny" style="font-size:52px"></div>
+            <div>Salida {{w.datosSol[0].sunrise | horasMinutos}} -
+              Puesta {{w.datosSol[0].sunset | horasMinutos}}</div>
+              <div>Altitud: {{w.datosSol[0].altitude | altitud}}</div>
+              <div>Azimuth: {{w.datosSol[0].azimuth | azimuth}} </div>
+              <div>Hora mejor fotografía: {{w.datosSol[0].goldenHour | horasMinutos}} - {{w.datosSol[0].goldenHourEnd | horasMinutos}} </div>
+            </div>
+            <div class="item">
+              <fase-lunar  tamanio-luna="50"  fecha="{{w.fechaAhoraMismo}}"  lat="{{w.forecast.latitude}}" lng="{{w.forecast.longitude}}" title=""></fase-lunar>
+              <div>Día: {{w.datosLuna[0].alterday.toFixed(2)}} - {{w.datosLuna[0].phase|trim|nombreFaseLunar}}</div>
+              <div>Salida {{w.datosLuna[0].rise | horasMinutos}} - Puesta {{w.datosLuna[0].set | horasMinutos}} </div>
 
-          <div ng-if="w.forecast.currently.visibility" class="item">Visibilidad: {{w.forecast.currently.visibility | visibilidad}}</div>
-          <div  ng-if="w.forecast.currently.humidity" class="item">Humedad: {{w.forecast.currently.humidity | porcentaje}}</div>
+              <div>Altitud: {{w.datosLuna[0].altitude | altitud}}</div>
+              <div>Azimuth: {{w.datosLuna[0].azimuth | azimuth}}</div>
+              <div>Distancia: {{w.datosLuna[0].distance |number}}km</div>
+            </div>
+
+            <div class="item">
+              <brujula fecha="{{w.fechaAhoraMismo}}"  lat="{{w.forecast.latitude}}" lng="{{w.forecast.longitude}}"></brujula>
+            </div>
+
+          </div>
         </div>
-
-
-      </div>
-    </div>
-  </ion-scroll>
-</ion-content>
-</ion-view>
+      </ion-scroll>
+    </ion-content>
+  </ion-view>

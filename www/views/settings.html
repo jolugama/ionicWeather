@@ -1,27 +1,43 @@
 <ion-view view-title="Configuración">
   <ion-content class="config">
     <ion-list>
-      <ion-item class="item-divider">Unidades</ion-item>
-      <ion-radio ng-model="st.settings.units" name="a" ng-value="'si'" ng-change="st.guardaConfig()">Sistema Internacional (Métrico)</ion-radio>
-      <ion-radio ng-model="st.settings.units" name="a" ng-value="'us'" ng-change="st.guardaConfig()">Sistema Anglosajón (Imperial)</ion-radio>
       <ion-item class="item-divider">Idioma</ion-item>
       <ion-radio ng-model="st.settings.lang" name="lang" ng-value="'es'" ng-change="st.guardaConfig()">Castellano</ion-radio>
       <ion-radio ng-model="st.settings.lang" name="lang" ng-value="'en'" ng-change="st.guardaConfig()">Inglés</ion-radio>
+
+      <ion-item class="item-divider">Unidades</ion-item>
+      <ion-radio ng-model="st.settings.units" name="a" ng-value="'si'" ng-change="st.guardaConfig()">Sistema Internacional (Métrico)</ion-radio>
+      <ion-radio ng-model="st.settings.units" name="a" ng-value="'us'" ng-change="st.guardaConfig()">Sistema Anglosajón (Imperial)</ion-radio>
+
       <ion-item class="item-divider">Tipo icono</ion-item>
       <ion-radio ng-model="st.settings.icono" name="b" ng-value="'animado'" ng-change="st.guardaConfig()">Icono animado</ion-radio>
       <ion-radio ng-model="st.settings.icono" name="b" ng-value="'ionic'" ng-change="st.guardaConfig()">Icono Ionic</ion-radio>
-      <div class="item item-divider">Días de Pronóstico<span class="badge badge-dark">{{st.settings.days}}</span></div>
-      <div class="item range range-positive">
-        2 <input type="range" name="days" ng-model="st.settings.days" min="2" max="8" value="8" ng-change="st.guardaConfig()"> 8
-      </div>
-      <div class="item item-button-right">Favoritos <button class="button button-small" ng-click="st.canDelete = !st.canDelete">{{st.canDelete ? 'editable' : 'bloqueado'}}</button></div>
-    </ion-list>
 
-    <ion-list show-delete="st.canDelete">
-      <ion-item ng-repeat="location in st.locations">
-        <ion-delete-button class="ion-minus-circled" ng-click="st.remove($index)"></ion-delete-button>
-        {{location.city}}
-      </ion-item>
-    </ion-list>
-  </ion-content>
+      <ion-item class="item-divider">Otros</ion-item>
+
+      <ion-toggle toggle-class="toggle-morado" ng-change="st.guardaConfig()"
+      ng-model="st.settings.live"
+      ng-true-value="true"
+      ng-false-value="false">
+      Modo Live
+    </ion-toggle>
+
+    <!-- <ion-radio ng-model="st.settings.live" name="live" ng-value="true" ng-change="st.guardaConfig()">Si</ion-radio>
+    <ion-radio ng-model="st.settings.live" name="live" ng-value="false" ng-change="st.guardaConfig()">No</ion-radio> -->
+
+
+    <div class="item item-divider">Días de Pronóstico<span class="badge badge-dark">{{st.settings.days}}</span></div>
+    <div class="item range range-positive">
+      2 <input type="range" name="days" ng-model="st.settings.days" min="2" max="8" value="8" ng-change="st.guardaConfig()"> 8
+    </div>
+    <div class="item item-button-right">Favoritos <button class="button button-small" ng-click="st.canDelete = !st.canDelete">{{st.canDelete ? 'editable' : 'bloqueado'}}</button></div>
+  </ion-list>
+
+  <ion-list show-delete="st.canDelete">
+    <ion-item ng-repeat="location in st.locations">
+      <ion-delete-button class="ion-minus-circled" ng-click="st.remove($index)"></ion-delete-button>
+      {{location.city}}
+    </ion-item>
+  </ion-list>
+</ion-content>
 </ion-view>

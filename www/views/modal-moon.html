@@ -21,13 +21,17 @@
   <ion-content>
     <div class="list">
       <div  class="item text-center itemArreglo" collection-repeat="day in mimodal.datos">
-        <div class="row centradoVertical" ng-class="{'superLunaRow' : day.superLuna===true }">
-          <div class="col centradoVertical" ng-class="{'superLunaRow' : day.superLuna===true }">{{day.fecha | diaMes}}</div>
-          <div class="col centradoVertical">{{day.rise | date:'H:mm' }}</div>
-          <div class="col centradoVertical">{{day.set | date:'H:mm' }}</div>
-          <div class="col centradoVertical" ng-class="{'superLunaCol': day.superLuna===true  }">{{day.distance |redondeoMiles |number}}km </div>
+        <div class="row row-center" ng-class="{'superLunaRow' : day.superLuna===true }">
+          <div class="col " ng-class="{'superLunaRow' : day.superLuna===true }">{{day.fecha | diaMes}}</div>
+          <div class="col ">{{day.rise | date:'H:mm' }}</div>
+          <div class="col ">{{day.set | date:'H:mm' }}</div>
+          <div class="col " ng-class="{'superLunaCol': day.superLuna===true  }">{{day.distance |redondeoMiles |number}}km </div>
           <!-- <div class="col"><fase-lunar tamanio-luna="{{day.tamanio}}" grados="{{day.altergrad}}" title="{{day.phase}}"></fase-lunar></div> -->
-          <div class="col"><fase-lunar  tamanio-luna="{{day.tamanio}}"  fecha="{{day.horaLuna}}"  lat="40" lng="-4" title="{{day.phase}}"></fase-lunar></div>
+          <div class="col">
+            <br>
+            <div fase-lunar  tamanio-luna="{{day.tamanio}}"  fecha="{{day.horaLuna}}"  lat="40" lng="-4" title="{{day.phase}}"></div>
+            <br>
+          </div>
         </div>
       </div>
     </div>

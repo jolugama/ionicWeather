@@ -1,3 +1,4 @@
+//colores aplicación
 $color0:rgba(#896beb, 0.90);
 $color1:rgba(#896beb, 0.70);
 $color2:rgba(#896beb, 0.65);
@@ -7,42 +8,175 @@ $color5:rgba(#896beb, 0.15);
 $color6:rgba(#896beb, 0.02);
 $letrasColor1:#FFF;
 
+*{
+  font-family: 'Indie Flower', cursive !important;
+  font-size: 16px;
+  font-weight: 200;
+}
+
+.info{
+  font-size: 1.2em;
+}
+.toggle.toggle-morado input:checked + .track {
+  background-color: $color2;
+}
+.toggle-small input:checked + .track .handle{
+  background-color: $color0;
+}
+
 ion-header-bar{
   background-color: $color1 !important;
 }
-.item .item-content.activated{
-    background-color: $color0 ;
-    border-color:$color1 ;
-    color: $letrasColor1;
+.ion-content{
+  overflow-scroll:false;
 }
+
+//cambio de colores
 .bar .title,.bar .buttons-left span, .bar .buttons-right span  {
   color:$letrasColor1 !important;
 }
-.modal{
-  max-width: 800px;
-  margin: 0 auto;
+
+.item .item-content.activated{
+  background-color: $color0 ;
+  border-color:$color1 ;
+  color: $letrasColor1;
 }
-.scroll-page .icon:before {
-  margin-top:-13px;
-  padding-right: 3px;
+.item-radio input:checked + .radio-content .item-content{
+  background: $color5;
+}
+//fin cambio de colores
+
+//ko (sin internet)
+.ko{
+  background-image: url("../img/ko.jpg");
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 100%;
+  height: 100%;
+  animation: bounceInLeft 2s;
+}
+//fin ko
+
+//weather 1ªpantalla
+.botonAlarma{
+  height: 30px !important;
+  min-height: 30px;
+  padding-top: 5px;
+
+}
+.button.button-full {
+  margin-top: 0px;
+}
+.botonAlarma .icon:before{
+  font-size:25px;
+  margin-top: -14px;
+  padding-right: 5px;
+}
+.botonAlarma .ion-flame:before,.botonAlarma .ion-information {
+  font-size:20px !important;
+}
+
+.iconoDiario{
+  display:inline-block;
+}
+.botonAlarmado{
+  background-color: $color3 !important;
+  border:3px solid $color4 !important;
+  box-shadow: 2px 4px 7px #666;
+}
+.botonInfo{
+  background-color: $color4 !important;
+  border:3px solid $color5 !important;
+}
+.botonAlarmado:hover,.botonInfo:hover {
+  box-shadow: 1px 3px 6px #666;
+}
+.botonAlarmado:active,.botonInfo:active {
+  box-shadow: 1px 1px 5px #666;
+}
+
+
+
+.boxAlarma{
+  position: absolute;
+  right: 0px;
+  margin-right: 10px;
+  margin-top: -60px;
+  width: 100px;
+  height: 60px;
+  padding-top: 16px;
+  padding-left: 4px;
+  border-radius: 34px;
+  background-color: $color4;
+  border:3px solid $color5;
+  box-shadow: 2px 4px 7px #666;
+
+  .iconoDiario {
+    font-size: 40px !important;
+    display: inline-block;
+
+  }
+}
+.boxAlarma:hover {
+  box-shadow: 1px 3px 6px #666;
+}
+.boxAlarma:active {
+  box-shadow: 1px 2px 16px #666;
+}
+
+.alertaActivada{
+  padding-top: 10px;
+  padding-left: 4px;
+  background-color: $color2;
+  border:3px solid $color3;
+  .iconoDiario {
+
+  }
+}
+
+//fin weather 1ªpantalla
+
+// .scroll-page .icon:before {
+//   margin-top:-13px;
+//   padding-right: 3px;
+// }
+
+//weather 2ªpantalla
+
+.fila{
+  height: 47px;
+}
+.sumario{
+  background-color: white;
+  z-index: 1;
+}
+.row {
+  padding:2px;
+}
+.col{
+  padding:1px;
+}
+.row .scroll-page .icon:before {
+  margin-top:0px !important;
+  padding-right: 0px !important;
+}
+
+
+.col .icon:before{
+  font-size: 60px
+}
+.col .ion-ios-cloud:before{
+  font-size: 46px !important;
 }
 .scroll-page .row + .row {
   margin-top: 0;
   padding: 0px;
 }
-
-.centradoVertical{
-  padding-top:14px;
-}
-
 .scroll-page .row:nth-of-type(odd) {
   background: $color5;
 }
 .scroll-page .row:nth-of-type(even) {
   background: $color6;
-}
-.item-radio input:checked + .radio-content .item-content{
-  background: $color5;
 }
 .scroll-page .wind-icon {
   display: inline-block;
@@ -50,36 +184,17 @@ ion-header-bar{
 .scroll-page.center {
   text-align: center;
 }
-
-.scroll-page .has-header {
-  position: relative;
-}
-
-
-.iconoDiario{
-  font-size: 40px;
-  display:inline-block;
-  width: 40px;
-}
-.porcentajeIconoDiario{
-  float:left;
-  padding-left: 35px;
-  top: -27.4px;
-}
-
 .scroll-view.scroll-y {
   //  overflow-y: hidden;
 }
-.ion-content{
-  overflow-scroll:false;
+.scroll-page .has-header {
+  position: relative;
 }
-
 
 .scroll-page .primary {
   margin: 0;
   font-size: 4em;
   font-weight: lighter;
-
 }
 .scroll-page .secondary {
   margin: 0;
@@ -87,6 +202,48 @@ ion-header-bar{
   font-weight: lighter;
 }
 
+.porcentajeIconoDiario{
+  float:left;
+  padding-left: 35px;
+  top: -40px;
+}
+//fin weather 2ªpantalla
+
+
+
+//modal
+.barraModal{
+  font-size: 12px !important;
+  line-height: 20px !important;
+  margin: 0px !important;
+}
+.modal{
+  max-width: 800px;
+  margin: 0 auto;
+}
+.bar{
+  border-top:0px !important;
+  border-bottom:0px !important;
+}
+.row.titulo .col{
+  font-weight: 900;
+}
+.itemArreglo{
+  top:42px !important;
+  padding: 0px;
+}
+
+.superLunaRow{
+  background-color: rgba(255, 28, 4, 0.21) !important;
+}
+.superLunaCol{
+  font-weight: bold;
+  color:rgba(255, 4, 4, 0.8);
+}
+//fin modal
+
+
+//loading con directiva cg-busy
 .loading-sign .spinner svg {
   width: 90px;
   height: 90px;
@@ -98,7 +255,6 @@ ion-header-bar{
 .loading-wrapper{
   position: absolute;
   background: rgba(255, 255, 255, 0.9);
-
 }
 
 .loading-sign{
@@ -120,6 +276,15 @@ ion-header-bar{
   max-width: 400px;
   min-width: auto;
 }
+//fin loading con directiva cg-busy
+
+
+
+// .centradoVertical{
+//   padding-top:14px;
+// }
+
+
 .ocultar{
   color:#FFF;
 }
@@ -140,40 +305,6 @@ ion-header-bar{
 }
 
 
-.boxAlarma{
-  position: absolute;
-  right: 0px;
-  margin-right: 10px;
-  margin-top: -60px;
-  width: 60px;
-  height: 60px;
-  padding-top: 16px;
-  padding-left: 4px;
-  border-radius: 34px;
-  background-color: $color4;
-  border:3px solid $color5;
-  box-shadow: 2px 4px 7px #666;
-
-  .iconoDiario {
-    font-size: 32px !important;
-  }
-}
-.boxAlarma:hover {
-  box-shadow: 1px 3px 6px #666;
-}
-.boxAlarma:active {
-  box-shadow: 1px 2px 16px #666;
-}
-
-.alertaActivada{
-  padding-top: 10px;
-  padding-left: 4px;
-  background-color: $color2;
-  border:3px solid $color3;
-  .iconoDiario {
-    font-size: 58px !important;
-  }
-}
 
 .menu{
   .overflow-scroll {
@@ -187,151 +318,62 @@ ion-header-bar{
 .item-divider {
   background-color: $color3;
 }
+// .item{
+//   padding:14px 0px 14px 0px !important;
+// }
 
 
-//modal
-.barraModal{
-  font-size: 12px !important;
-  line-height: 20px !important;
-  margin: 0px !important;
-}
-.bar{
-  border-top:0px !important;
-  border-bottom:0px !important;
-}
-.row.titulo .col{
-  font-weight: 900;
-}
-.itemArreglo{
-  top:50px !important;
-}
 
-.superLunaRow{
-  background-color: rgba(255, 28, 4, 0.21) !important;
-}
-.superLunaCol{
-  font-weight: bold;
-  color:rgba(255, 4, 4, 0.8);
-}
+
 
 //3º pantalla
 .datosClima .item{
   text-align: center;
-}
-
-//par alos apaisados y moviles pequeñicos
-@media (max-height: 440px ) and (orientation: landscape) {
-  .scroll-page .primary {
-    font-size: 2em !important;
-    margin: 0 auto !important;
-  }
-  .scroll-page .secondary {
-    margin: 0;
-    font-size: 16em;
-    font-weight: lighter;
-    position: fixed;
-    left: 30px;
-  }
-
-  .weatherIcon {
-    position: absolute;
-    left: 4.2em;
-    margin-top: 100px;
-    height: 2.4em;
-    font-size: 2.0em;
-  }
-  .carga{
-    display:none;
-  }
-  .info{
-    position: absolute;
-    right: 25px;
-    margin-top: 65px;
-    font-size: 19px;
-    line-height: 1.3em;
-  }
-  .col{
-    padding:0px !important;
-  }
-  .row{
-    padding:0px;
-  }
-  .iconoDiario {
-    font-size: 30px;
-  }
-  .porcentajeIconoDiario {
-    padding-left: 26px;
-    top: -20.4px;
-  }
-  .boxAlarma {
-    margin-top: -25px;
-  }
-}
-
-@media (min-height: 550px)  {
-  .scroll-page .primary {
-    margin: 0;
-    font-size: 45px;
-    font-weight: lighter;
-    padding:0.5em 0.8em 0 0.8em;
-  }
-  .scroll-page .secondary {
-    margin: 0;
-    font-size: 190px;
-    font-weight: lighter;
-  }
-  .porcentajeIconoDiario {
-    float: left;
-    padding-left: 27px;
-    top: -28px;
-  }
-  .has-header p{
-    font-size: 1.3em;
-  }
-  .row{
-    padding:0px !important;
-  }
-  .padding{
-    padding:0px !important;
-    padding-left:10px !important;
-    padding-right:10px !important;
-  }
-
-}
-
-@media (min-width: 900px) and  (min-height: 700px)  {
-  .view {
-    max-width: 900px;
-    margin: 0 auto;
-  }
-  .scroll-page.center{
-    max-width: 900px;
-  }
-  .bar .title{
-    max-width: 900px;
-  }
-
+  padding: 3px;
 }
 
 
 
 
-//
-//
-//
-// @media (min-height: 700px) {
-//   .scroll-page .primary {
-//     margin: 0;
-//     font-size: 90px;
-//     font-weight: lighter;
-//   }
-//   .scroll-page .secondary {
-//     margin: 0;
-//     font-size: 300px;
-//     font-weight: lighter;
-//   }
-//
-//   .has-header p{
-//     font-size: 1.6em;
-//   }
-// }
+
+
+//efectos
+@keyframes fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes bounceInLeft {
+  from, 90%, to {
+    -webkit-animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+    animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+  }
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(-3000px, 0, 0);
+    transform: translate3d(-3000px, 0, 0);
+  }
+  90% {
+    opacity: 1;
+    -webkit-transform: translate3d(5px, 0, 0);
+    transform: translate3d(5px, 0, 0);
+  }
+  to {
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
+@keyframes bounceOutRight {
+  20% {
+    opacity: 1;
+    -webkit-transform: translate3d(-20px, 0, 0);
+    transform: translate3d(-20px, 0, 0);
+  }
+  to {
+    opacity: 0;
+    -webkit-transform: translate3d(2000px, 0, 0);
+    transform: translate3d(2000px, 0, 0);
+  }
+}
+//fin efectos

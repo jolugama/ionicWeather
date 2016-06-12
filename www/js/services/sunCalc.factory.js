@@ -15,15 +15,19 @@
 
     return service;
 
-    function calcula(tipo,lat,lon) {
+    function calcula(tipo,lat,lon,dias) {
 
       var days = [];
       var day = Date.now();
         day -= 1000 * 60 * 60 * 24;
-      for (var i = 0; i < 365; i++) {
+      for (var i = 0; i < dias; i++) {
         day += 1000 * 60 * 60 * 24;
         if(tipo==='sol'){
           days.push(SunCalc.getTimes(day, lat, lon));
+
+          var nuevoObjeto = angular.extend({}, days[days.length-1], SunCalc.getPosition(day, lat, lon));
+          days[days.length-1]=nuevoObjeto;
+
         }else if(tipo==='luna'){
           days.push(SunCalc.getMoonTimes(day, lat, lon));
 

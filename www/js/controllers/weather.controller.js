@@ -5,19 +5,20 @@
   .controller('WeatherController', WeatherController);
   WeatherController.$inject=['$scope','$window','$log', '$stateParams', '$ionicPlatform', '$ionicLoading', '$ionicActionSheet',
   '$ionicModal', '$timeout', 'ubicacionesService', 'settingsService', 'forecastService','$cordovaVibration','cordovaDeviceOrientationService',
-  'utils','ttsService','sunCalService'];
+  'utils','ttsService','sunCalService','$interval','$rootScope'];
 
   /* @ngInject */
   function WeatherController($scope, $window, $log, $stateParams, $ionicPlatform, $ionicLoading, $ionicActionSheet,
     $ionicModal, $timeout, ubicacionesService, settingsService, forecastService, $cordovaVibration, cordovaDeviceOrientationService,
-    utils,ttsService,sunCalService){
+    utils,ttsService,sunCalService,$interval,$rootScope){
 
       var vm=this;
       vm.carga=false;
+      vm.ko=false;
       vm.params = $stateParams;  //parametros que se han pasado desde la vista search con ui-sref, en app.js url: '/weather/:city/:lat/:lng'
 
       vm.settings = utils.getStorage('config') || settingsService;
-      vm.AlarmaIcono='info'; // icono por defecto en alarma
+
 
 
       /**
@@ -26,7 +27,7 @@
       vm.loadingOpen = function() {
         vm.carga=false;
         $ionicLoading.show({
-          templateUrl: '../views/loadingIonic.html',
+          templateUrl: 'views/loadingIonic.html',
           duration: 10000
         });
       };
@@ -50,16 +51,43 @@
       //fin slider
 
 
+      vm.getDatosSol=function(){
+        vm.datosSol =sunCalService.calcula('sol',vm.params.lat, vm.params.lng,1);
+        $log.debug('datosSol',vm.datosSol[0]);
+      }
+      vm.getDatosLuna=function(){
+        vm.datosLuna =sunCalService.calcula('luna',vm.params.lat, vm.params.lng,1);
+        $log.debug('datosLuna',vm.datosLuna[0]);
+      }
+
+
+      //modo live. para refresco continuo de pantalla 3. posicion de sol y luna.
+      $interval.cancel($rootScope.modoLive);
+      if(vm.settings.live===true){
+        $rootScope.modoLive=$interval(function(){
+          vm.getDatosSol();
+          vm.getDatosLuna();
+          vm.fechaAhoraMismo=new Date();
+        }, 10000, 1000);
+      }
+
       //refresca la pantalla y llama al rest forecast
       vm.refrescar = function() {
         vm.loadingOpen();
         $log.debug('llamando al refresco');
+        vm.getDatosSol();
+        vm.getDatosLuna();
         vm.fechaAhoraMismo=new Date();
+
         //llama a servicio forecast
         forecastService.getForecast(vm.params,vm.settings).then(function(response){
           vm.alertaHoras(response.hourly.data);
           vm.forecast = response;
           vm.resumenAlerta=response.hourly.summary;
+          vm.ko=false;
+        }).catch(function(){
+          vm.ko=true;
+          $log.debug('error, sin internet!!!');
         }).finally(function() {
           // Stop the ion-refresher from spinning
           $scope.$broadcast('scroll.refreshComplete');
@@ -81,50 +109,81 @@
         var lluvia=false;
         var nieve=false;
         var aguanieve=false;
-
         var muchoViento=false;
         var muchoCalor=false;
         var muchoFrio=false;
-
+        vm.AlarmaIcono=[];
         //busca si hay alarmas en alguna hora del día.
         //Si hay más de una, mostrará si llueve o nieva, hace viento fuerte, clima muy alto o muy bajo, por este orden
+
+        var MAX_TEMP=35;
+        var MIN_TEMP=0;
+        var MAX_VIENTO=11;
+        var settings = utils.getStorage('config') || settingsService;
+        //si esta en modo us, transformamos los max, min a farenheit. y millas/h
+        if(settings.units==='us'){
+          MAX_TEMP= MAX_TEMP * 9 / 5 + 32;
+          MIN_TEMP= MIN_TEMP * 9 / 5 + 32;
+          MAX_VIENTO= MAX_VIENTO/0.44704;
+        }
+
         for (var i = 0; i < arrayHoras.length; i++) {
-          if(parseFloat(arrayHoras[i].temperatureMax || arrayHoras[i].temperature) > 35){
+          if(parseFloat(arrayHoras[i].temperatureMax || arrayHoras[i].temperature) > MAX_TEMP){
+            if(muchoCalor===false){
+              vm.AlarmaIcono.push('muchoCalor');
+            }
             muchoCalor=true;
-            vm.AlarmaIcono='muchoCalor';
-          }else if(parseFloat(arrayHoras[i].temperatureMax ) < 0){
+          }else if(parseFloat(arrayHoras[i].temperatureMax ) < MIN_TEMP){
+            if(muchoFrio===false){
+              vm.AlarmaIcono.push('muchoFrio');
+            }
             muchoFrio=true;
-            vm.AlarmaIcono='muchoFrio';
+
           }
 
-          if(parseFloat(arrayHoras[i].windSpeed) > 11){
+          if(parseFloat(arrayHoras[i].windSpeed) > MAX_VIENTO){
+            if(muchoViento===false){
+              vm.AlarmaIcono.push('wind');
+            }
             muchoViento=true;
-            vm.AlarmaIcono='wind';
+
           }
 
           if(arrayHoras[i].icon==='rain'){
+            if(lluvia===false){
+              vm.AlarmaIcono.push('rain');
+            }
             lluvia=true;
-            vm.AlarmaIcono='rain';
           }else if(arrayHoras[i].icon==='snow'){
+            if(nieve===false){
+              vm.AlarmaIcono.push('snow');
+            }
             nieve=true;
-            vm.AlarmaIcono='snow';
           }else if(arrayHoras[i].icon==='sleet'){
+            if(aguanieve===false){
+              vm.AlarmaIcono.push('sleet');
+            }
             aguanieve=true;
-            vm.AlarmaIcono='sleet';
+
           }
 
         }
 
+        if(vm.AlarmaIcono.length===0){
+          vm.AlarmaIcono.push('info'); // icono por defecto en alarma
+        }
+        $log.debug('alarmaicono',vm.AlarmaIcono)
+
         var frase='';
         if(lluvia || nieve || aguanieve){
-          frase='Hoy llévate paraguas. ';
+          frase='Posibilidad de lluvia.';
           try {
             $cordovaVibration.vibrate([100, 500, 500, 500, 1000]);
           } catch (e) {
 
           }
           if(nieve || aguanieve){
-            frase+='Si conduces ten cuidado, nieve o aguanieve. ';
+            frase+='Posibilidad de nieve o aguanieve. ';
             try {
               $cordovaVibration.vibrate([1000, 1000, 3000, 1000, 5000]);
 
@@ -134,7 +193,7 @@
           }
         }
         if(muchoViento){
-          frase+='Cuidado: Viento huracanado.'
+          frase+='hace mucho viento.'
           try {
             $cordovaVibration.vibrate(500);
           } catch (e) {
@@ -142,14 +201,14 @@
           }
         }
         if(muchoCalor){
-          frase+='Vístete ligero, hace mucho calor';
+          frase+='hace mucho calor.';
           try {
             $cordovaVibration.vibrate(500);
           } catch (e) {
 
           }
         }else if(muchoFrio){
-          frase+='Vístete bien abrigado, hace mucho frío';
+          frase+='hace mucho frío.';
           try {
             $cordovaVibration.vibrate(500);
           } catch (e) {
@@ -206,7 +265,7 @@
           }
         });
       };
-      
+
       $scope.mimodal={};
       $scope.mimodal.params={
         lat: vm.params.lat,
@@ -223,13 +282,9 @@
           scope: $scope
         }).then(function (modal) {
           vm.modal = modal;
-          if(tipo==='sol'){
-            $scope.mimodal.datos =sunCalService.calcula(tipo,vm.params.lat, vm.params.lng);
-          }else if(tipo==='luna'){
-            $scope.mimodal.datos =sunCalService.calcula(tipo,vm.params.lat, vm.params.lng);
-          }
-
-          console.log('chart', $scope.mimodal.datos);
+      
+          $scope.mimodal.datos =sunCalService.calcula(tipo,vm.params.lat, vm.params.lng,368);
+          console.log('mimodal.datos', $scope.mimodal.datos);
           vm.modal.show();
         });
       };
@@ -240,7 +295,12 @@
       };
       //al destruirse el controllador, borra el modal:
       $scope.$on('$destroy', function() {
-        vm.modal.remove();
+        try {
+          vm.modal.remove();
+        } catch (e) {
+          //al iniciar y no se ha abierto, da error.
+        }
+
       });
 
     }

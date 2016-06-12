@@ -12,7 +12,7 @@
   function SearchController($scope, $log, $timeout, $ionicPopup, $ionicLoading, geocodeService, cordovaGeolocationService,
     $cordovaKeyboard,utils,ubicacionesService,$state) {
       var vm = this;
-      
+
       vm.busqueda = '';
       vm.bloqueo=false;
 
@@ -23,7 +23,7 @@
 
       vm.loadingOpen = function() {
         $ionicLoading.show({
-          templateUrl: '../views/loadingIonic.html',
+          templateUrl: 'views/loadingIonic.html',
           duration: 10000
         });
       };

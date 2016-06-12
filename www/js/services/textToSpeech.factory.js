@@ -5,10 +5,10 @@
   .module('app')
   .factory('ttsService', ttsService);
 
-  ttsService.$inject = ['utils','$log'];
+  ttsService.$inject = ['utils','$log','settingsService'];
 
   /* @ngInject */
-  function ttsService(utils,$log) {
+  function ttsService(utils,$log,settingsService) {
     var service = {
       habla: habla
     };
@@ -22,7 +22,13 @@
         var voz='';
         var locales=[];
         var voces;
-        if(settings.lang==='es'){
+        var idioma;
+        if(settings && settings.lang){
+          idioma=settings.lang;
+        }else{
+          idioma=settingsService.lang;
+        }
+        if(idioma==='es'){
           locales=['es-ES'];
           local=locales[Math.floor(Math.random() * locales.length)];
           voces=['Spanish Female']; //'Spanish Latin American Female'

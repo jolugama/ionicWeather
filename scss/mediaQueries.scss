@@ -1,0 +1,116 @@
+//par alos apaisados y moviles pequeñicos
+@media (max-height: 440px ) and (orientation: landscape) {
+  .scroll-page .primary {
+    font-size: 2em !important;
+    margin: 0 auto !important;
+  }
+  .scroll-page .secondary {
+    margin: 0;
+    font-size: 16em;
+    font-weight: lighter;
+    position: fixed;
+    left: 30px;
+  }
+
+  .weatherIcon {
+    position: absolute;
+    left: 4.2em;
+    margin-top: 100px;
+    height: 2.4em;
+    font-size: 2.0em;
+  }
+  .carga{
+    display:none;
+  }
+  .info{
+    position: absolute;
+    right: 25px;
+    margin-top: -4px;
+    font-size: 19px;
+    line-height: 1.2em;
+  }
+  .col{
+    padding:0px !important;
+  }
+  .row{
+    padding:0px;
+  }
+  .iconoDiario {
+    font-size: 30px;
+  }
+  .porcentajeIconoDiario {
+    padding-left: 26px;
+    top: -20.4px;
+  }
+  .boxAlarma {
+    margin-top: -25px;
+  }
+}
+
+@media (min-height: 570px)  {
+  .scroll-page .primary {
+    margin: 0;
+    font-size: 45px;
+    // font-weight: lighter;
+    //padding:0.5em 0.8em 0 0.8em;
+  }
+  .scroll-page .secondary {
+    margin: 0;
+    font-size: 190px;
+    // font-weight: lighter;
+  }
+  .porcentajeIconoDiario {
+    float: left;
+    padding-left: 35px;
+    top: -36px;
+  }
+  .has-header p{
+    font-size: 1.3em;
+  }
+  // .row{
+  //   padding:5px !important;
+  // }
+  .padding{
+    padding:0px !important;
+    padding-left:10px !important;
+    padding-right:10px !important;
+  }
+
+}
+
+@media (min-width: 900px) and  (min-height: 700px)  {
+  .view {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .scroll-page.center{
+    max-width: 900px;
+  }
+  .bar .title{
+    max-width: 900px;
+  }
+
+}
+
+
+
+
+//
+//
+//
+// @media (min-height: 700px) {
+//   .scroll-page .primary {
+//     margin: 0;
+//     font-size: 90px;
+//     font-weight: lighter;
+//   }
+//   .scroll-page .secondary {
+//     margin: 0;
+//     font-size: 300px;
+//     font-weight: lighter;
+//   }
+//
+//   .has-header p{
+//     font-size: 1.6em;
+//   }
+// }

@@ -1,8 +1,8 @@
 .weatherIcon {
   position: relative;
-  margin: 1em auto 1.9em auto;
-  height: 7em;
-  font-size: 2em;
+  margin: 0.6em auto 0.6em auto;
+  height: 6em;
+  font-size: 1.8em;
   /* control icon size here */
   color: white;
   -webkit-animation: fadein 3s;

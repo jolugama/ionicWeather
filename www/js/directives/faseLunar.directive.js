@@ -4,13 +4,13 @@
   angular
   .module('app')
   .directive('faseLunar', faseLunar);
-  faseLunar.$inject=['$log','$rootScope'];
+  faseLunar.$inject=['$log'];
 
   /* @ngInject */
-  function faseLunar($log,$rootScope) {
+  function faseLunar($log) {
     var directive = {
-      restrict: 'E',
-      templateUrl: '../../views/faseLunarTemplate.html',
+      restrict: 'AE',
+      templateUrl: 'views/faseLunarTemplate.html',
       scope: {
         tamanioLuna: '@',
         grados: '@',
@@ -37,7 +37,6 @@
         }else if(window.MoonCalc && scope.fecha && scope.lat && scope.lng){
           var moonPos=MoonCalc.getMoonPosition(new Date(scope.fecha.replace(/"/g, '')),scope.lat,scope.lng);
           phase=moonPos.altergrad/360;
-            $rootScope.fase=moonPos.phase;
         }else{
           $log.debug('faltan atributos, atributos erroneos o no se ha cargado la librería MoonCalc');
         }

@@ -12,11 +12,11 @@ $interaccion: 10;
 .weatherIcon {
 
   position: relative;
-  margin: 1em auto 1.9em auto;
+  margin: 0.6em auto 0.6em auto;
 
   //width: 12em;
-  height: 7em;
-  font-size: 2em; /* control icon size here */
+  height: 6em;
+  font-size: 1.8em; /* control icon size here */
   color: $colorFondoIcono;
   -webkit-animation: fadein 3s;
   animation: fadein 3s;

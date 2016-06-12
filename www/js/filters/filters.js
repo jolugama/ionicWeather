@@ -24,6 +24,14 @@
     };
   })
 
+  .filter('horasMinutos', function () {
+    return function (input) {
+      moment.locale('es');
+      return moment(input).format('HH:mm');
+
+    };
+  })
+
   .filter('diaMes', function () {
     return function (input) {
       if (input) {
@@ -53,12 +61,50 @@
     };
   })
 
-  .filter('temperatura', function (settingsService) {
+  .filter('altitud', function () {
+    return function (n) {
+      if (n) {
+        var altitud= (180 / Math.PI * n).toFixed(2) ;
+        return altitud+'º';
+        //return altitud>0 ? altitud+'º' : ' - ';
+      }
+    };
+  })
+
+  .filter('azimuth', function () {
+    return function (n) {
+      if (n) {
+
+        var num=parseFloat(((180 / Math.PI * n) + 180).toFixed(2));
+        var result='';
+        if(num>270 ||num<90){
+          result=num+'º N';
+        }else{
+          result=num+'º S';
+        }
+
+        if(num>0 && num<180){
+          result=result+'E';
+        }else if(num>180 && num<360){
+          result=result+'O';
+        }
+
+
+        return result;
+
+      }
+    };
+  })
+
+
+
+  .filter('temperatura', function (settingsService,utils) {
     return function (n) {
       if (n) {
         var value = Math.round(n);
 
-        if(settingsService.units==='si'){
+        var settings = utils.getStorage('config') || settingsService;
+        if(settings.units==='si'){
           value+='ºC';
         }else{
           value+='F';
@@ -67,10 +113,11 @@
       }
     };
   })
-  .filter('viento', function(settingsService){
+  .filter('viento', function(settingsService,utils){
     return function(n){
       var value = Math.round(n);
-      if(settingsService.units==='si'){
+      var settings = utils.getStorage('config') || settingsService;
+      if(settings.units==='si'){
         value+='m/s';
       }else{
         value+='millas/hora';
@@ -78,10 +125,11 @@
       return  value;
     };
   })
-  .filter('visibilidad', function(settingsService){
+  .filter('visibilidad', function(settingsService,utils){
     return function(n){
       var value = Math.round(n);
-      if(settingsService.units==='si'){
+      var settings = utils.getStorage('config') || settingsService;
+      if(settings.units==='si'){
         value+='km';
       }else{
         value+='millas';
@@ -102,8 +150,8 @@
       cloudy: 'ion-ios-cloudy',
       'partly-cloudy-day': 'ion-ios-partlysunny',
       'partly-cloudy-night': 'ion-ios-cloudy-night',
-      'muchoCalor':'ion-thermometer',
-      'muchoFrio':'ion-thermometer',
+      'muchoCalor':'ion-flame',
+      'muchoFrio':'ion-ios-snowy',
       'info': 'ion-information'
 
     };
@@ -141,5 +189,18 @@
       return map[nombreLuna] || '';
     };
   })
+
+
+
+  .filter('descViento', ['escalaVientoService', function(escalaVientoService) {
+    return function(metros) {
+      if(metros){
+        return escalaVientoService.getDescripcion(Math.round(metros*10)/10)[0];
+      }
+
+    }
+  }]);
+
+
 
 })();

@@ -23,11 +23,11 @@
       <div class="item text-center itemArreglo" collection-repeat="day in mimodal.datos">
         <div class="row">
           <div class="col" >{{day.sunrise | diaMes}}</div>
-          <div class="col ">{{day.dawn | date:'H:mm' }}</div>
-          <div class="col">{{day.sunrise | date:'H:mm' }}</div>
-          <div class="col">{{day.solarNoon | date:'H:mm' }}</div>
-          <div class="col">{{day.sunset | date:'H:mm'}}</div>
-          <div class="col">{{day.dusk | date:'H:mm'}}</div>
+          <div class="col ">{{day.dawn | date:'HH:mm' }}</div>
+          <div class="col">{{day.sunrise | date:'HH:mm' }}</div>
+          <div class="col">{{day.solarNoon | date:'HH:mm' }}</div>
+          <div class="col">{{day.sunset | date:'HH:mm'}}</div>
+          <div class="col">{{day.dusk | date:'HH:mm'}}</div>
         </div>
 
       </div>

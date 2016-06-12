@@ -12,7 +12,8 @@
       units: 'si',
       days: 8,
       lang:'es',
-      icono:'animado'
+      icono:'animado',
+      live: false
     };
 
       return settings;

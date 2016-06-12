@@ -8,8 +8,8 @@
     /* @ngInject */
     function iconoTiempo() {
         var directive = {
-            restrict: 'E',
-            templateUrl: '../../views/iconosTemplate.html',
+            restrict: 'AE',
+            templateUrl: 'views/iconosTemplate.html',
             scope: {
               tipoIcono: '@',
               clima: '@'
