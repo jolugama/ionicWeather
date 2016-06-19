@@ -114,11 +114,11 @@
 
 
     function getDescripcion(metros){
-  
+
       var resultado=['',''];
       for (var i =0; i<vientoJson.results.length ; i++) {
         var arrayMetros=vientoJson.results[i].ms.split('-');
-        if(metros>parseFloat(arrayMetros[0]) && metros<=parseFloat(arrayMetros[1])){
+        if(metros>=parseFloat(arrayMetros[0]) && metros<=parseFloat(arrayMetros[1])){
           resultado=[vientoJson.results[i].estado,vientoJson.results[i].desc];
           return resultado;
         }

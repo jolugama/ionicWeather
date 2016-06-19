@@ -20,9 +20,9 @@
             <h1 class="title">{{w.params.city.split(',')[0]}}, {{w.params.city.split(',')[1]}}. {{w.params.city.split(',')[2]}}</h1>
           </div>
           <div class="has-header" ng-show="w.carga">
-			 <button class="button button-full  botonAlarma" ng-class="{'botonAlarmado':w.AlarmaIcono[0]!='info', 'botonInfo':w.AlarmaIcono[0]=='info'}" ng-click="w.clickAlarma(w.resumenAlerta)">
+            <button class="button button-full  botonAlarma" ng-class="{'botonAlarmado':w.AlarmaIcono[0]!='info', 'botonInfo':w.AlarmaIcono[0]=='info'}" ng-click="w.clickAlarma(w.resumenAlerta)">
               <div class="icon  iconoDiario" ng-repeat="alarma in w.AlarmaIcono" ng-class="alarma | icons"></div>
-          	</button>
+            </button>
             <h2 class="primary">{{w.forecast.currently.temperature | temperatura}}</h2>
 
 
@@ -30,17 +30,17 @@
 
 
 
-          <div class="info" ng-show="w.carga">
-            <p  ng-class="w.forecast ? '' : 'ocultar'">{{w.forecast.currently.summary || '_'}}</p>
-            <p  ng-class="w.forecast ? '' : 'ocultar'">Temp. Min/Max: {{w.forecast.daily.data[0].temperatureMin | temperatura}} / {{w.forecast.daily.data[0].temperatureMax | temperatura}} </p>
-            <!-- <p  ng-class="w.forecast ? '' : 'ocultar'">Sensación térmica: {{w.forecast.currently.apparentTemperature | temperatura}}</p> -->
-            <p  ng-class="w.forecast ? '' : 'ocultar'">{{w.forecast.currently.windSpeed |  descViento}}: {{w.forecast.currently.windSpeed |  viento}}  <span class="icon wind-icon ion-ios7-arrow-thin-up" ng-style="{transform: 'rotate(' + w.forecast.currently.windBearing + 'deg)'}"></span></p>
-            <p ng-if="w.forecast.currently.visibility" >Visibilidad: {{w.forecast.currently.visibility | visibilidad}}</p>
-            <p  ng-if="w.forecast.currently.humidity" >Humedad: {{w.forecast.currently.humidity | porcentaje}}</p>
+            <div class="info" ng-show="w.carga">
+              <p  ng-class="w.forecast ? '' : 'ocultar'">{{w.forecast.currently.summary || '_'}}</p>
+              <p  ng-class="w.forecast ? '' : 'ocultar'">Temp. Min/Max: {{w.forecast.daily.data[0].temperatureMin | temperatura}} / {{w.forecast.daily.data[0].temperatureMax | temperatura}} </p>
+              <!-- <p  ng-class="w.forecast ? '' : 'ocultar'">Sensación térmica: {{w.forecast.currently.apparentTemperature | temperatura}}</p> -->
+              <p  ng-class="w.forecast ? '' : 'ocultar'">{{w.forecast.currently.windSpeed |  descViento}}: {{w.forecast.currently.windSpeed |  viento}}  <span class="icon wind-icon ion-ios7-arrow-thin-up" ng-style="{transform: 'rotate(' + w.forecast.currently.windBearing + 'deg)'}"></span></p>
+              <p ng-if="w.forecast.currently.visibility" >Visibilidad: {{w.forecast.currently.visibility | visibilidad}}</p>
+              <p  ng-if="w.forecast.currently.humidity" >Humedad: {{w.forecast.currently.humidity | porcentaje}}</p>
 
+            </div>
           </div>
         </div>
-	</div>
       </ion-slide-page>
 
       <!-- 2ª pantalla.  -->
@@ -73,31 +73,34 @@
             <div class="item">
 
 
-            <div class="icon ion-android-sunny" style="font-size:52px"></div>
-            <div>Salida {{w.datosSol[0].sunrise | horasMinutos}} -
-              Puesta {{w.datosSol[0].sunset | horasMinutos}}</div>
-              <div>Altitud: {{w.datosSol[0].altitude | altitud}}</div>
-              <div>Azimuth: {{w.datosSol[0].azimuth | azimuth}} </div>
-              <div>Hora mejor fotografía: {{w.datosSol[0].goldenHour | horasMinutos}} - {{w.datosSol[0].goldenHourEnd | horasMinutos}} </div>
+              <div class="icon ion-android-sunny" style="font-size:52px"></div>
+              <div>Salida {{w.datosSol[0].sunrise | horasMinutos}} -
+                Puesta {{w.datosSol[0].sunset | horasMinutos}}</div>
+                <div>Altitud: {{w.datosSol[0].altitude | altitud}}</div>
+                <div>Azimuth: {{w.datosSol[0].azimuth | azimuth}} </div>
+                <div>Hora mejor fotografía: {{w.datosSol[0].goldenHour | horasMinutos}} - {{w.datosSol[0].goldenHourEnd | horasMinutos}} </div>
+              </div>
+              <div class="item">
+                <fase-lunar  tamanio-luna="50"  fecha="{{w.fechaAhoraMismo}}"  lat="{{w.forecast.latitude}}" lng="{{w.forecast.longitude}}" title=""></fase-lunar>
+                <div>Día: {{w.datosLuna[0].alterday.toFixed(2)}} - {{w.datosLuna[0].phase|trim|nombreFaseLunar}}</div>
+                <div>Salida {{w.datosLuna[0].rise | horasMinutos}} - Puesta {{w.datosLuna[0].set | horasMinutos}} </div>
+
+                <div>Altitud: {{w.datosLuna[0].altitude | altitud}}</div>
+                <div>Azimuth: {{w.datosLuna[0].azimuth | azimuth}}</div>
+                <div>Distancia: {{w.datosLuna[0].distance |number}}km</div>
+              </div>
+              <div class="item">
+                <brujula tamanio="168"  fecha="{{w.fechaAhoraMismo}}"  lat="{{w.forecast.latitude}}" lng="{{w.forecast.longitude}}"></brujula>
+              </div>
+              
             </div>
-            <div class="item">
-              <fase-lunar  tamanio-luna="50"  fecha="{{w.fechaAhoraMismo}}"  lat="{{w.forecast.latitude}}" lng="{{w.forecast.longitude}}" title=""></fase-lunar>
-              <div>Día: {{w.datosLuna[0].alterday.toFixed(2)}} - {{w.datosLuna[0].phase|trim|nombreFaseLunar}}</div>
-              <div>Salida {{w.datosLuna[0].rise | horasMinutos}} - Puesta {{w.datosLuna[0].set | horasMinutos}} </div>
 
-              <div>Altitud: {{w.datosLuna[0].altitude | altitud}}</div>
-              <div>Azimuth: {{w.datosLuna[0].azimuth | azimuth}}</div>
-              <div>Distancia: {{w.datosLuna[0].distance |number}}km</div>
+          </div>
+        </ion-slide-page>
 
-            </div>
-</div>
-
-        </div>
-      </ion-slide-page>
-
-    </ion-slides>
+      </ion-slides>
 
 
 
-  </ion-content>
-</ion-view>
+    </ion-content>
+  </ion-view>

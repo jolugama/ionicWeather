@@ -52,13 +52,33 @@
     padding-left: 10px !important;
     padding-right: 10px !important; } }
 
-@media (min-width: 900px) and (min-height: 700px) {
+@media (min-width: 900px) and (min-height: 760px) {
+  .bar .button.button-clear .icon:before, .bar .button.button-clear.icon:before, .bar .button.button-clear.icon-left:before, .bar .button.button-clear.icon-right:before, .bar button.button-clear .icon:before, .bar button.button-clear.icon:before, .bar button.button-clear.icon-left:before, .bar button.button-clear.icon-right:before {
+    font-size: 52px !important; }
   .view {
     max-width: 900px;
     margin: 0 auto; }
+  .item, .row {
+    max-width: 902px; }
+  .col-40 {
+    text-align: center;
+    font-size: 1.5em; }
+  .col {
+    font-size: 1.5em; }
   .scroll-page.center {
     max-width: 900px; }
   .bar .title {
-    max-width: 900px; } }
+    max-width: 900px;
+    font-size: 1.5em; }
+  .scroll-page .primary {
+    font-size: 4em; }
+  .info {
+    font-size: 1.6em;
+    line-height: 1.5em; }
+  .weatherIcon {
+    margin: 1em auto 1em auto;
+    font-size: 2.8em; }
+  .slide-in-up.ng-enter-active, .slide-in-up > .ng-enter-active {
+    border-radius: 1em 1em 0 0; } }
 
 /*# sourceMappingURL=mediaQueries.css.map */

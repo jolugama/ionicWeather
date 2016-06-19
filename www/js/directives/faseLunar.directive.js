@@ -38,7 +38,7 @@
           var moonPos=MoonCalc.getMoonPosition(new Date(scope.fecha.replace(/"/g, '')),scope.lat,scope.lng);
           phase=moonPos.altergrad/360;
         }else{
-          $log.debug('faltan atributos, atributos erroneos o no se ha cargado la librería MoonCalc');
+          //$log.debug('faltan atributos, atributos erroneos o no se ha cargado la librería MoonCalc');
         }
 
         var radio=scope.tamanioLuna/2;

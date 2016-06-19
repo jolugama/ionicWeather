@@ -50,11 +50,12 @@
       });
       //fin slider
 
-
+      //datos del sol de un día
       vm.getDatosSol=function(){
         vm.datosSol =sunCalService.calcula('sol',vm.params.lat, vm.params.lng,1);
         $log.debug('datosSol',vm.datosSol[0]);
       }
+      //datos luna de un día
       vm.getDatosLuna=function(){
         vm.datosLuna =sunCalService.calcula('luna',vm.params.lat, vm.params.lng,1);
         $log.debug('datosLuna',vm.datosLuna[0]);
@@ -77,10 +78,11 @@
         $log.debug('llamando al refresco');
         vm.getDatosSol();
         vm.getDatosLuna();
-        vm.fechaAhoraMismo=new Date();
+
 
         //llama a servicio forecast
         forecastService.getForecast(vm.params,vm.settings).then(function(response){
+          vm.fechaAhoraMismo=new Date();
           vm.alertaHoras(response.hourly.data);
           vm.forecast = response;
           vm.resumenAlerta=response.hourly.summary;
@@ -282,7 +284,7 @@
           scope: $scope
         }).then(function (modal) {
           vm.modal = modal;
-      
+
           $scope.mimodal.datos =sunCalService.calcula(tipo,vm.params.lat, vm.params.lng,368);
           console.log('mimodal.datos', $scope.mimodal.datos);
           vm.modal.show();

@@ -1,0 +1,62 @@
+
+.brujulaNorte{
+  position: absolute;
+  text-align: center;
+
+  font-size: 15px;
+  top: -5px;
+  margin-left: -2px;
+}
+
+.brujulaSur{
+  position: absolute;
+  text-align: center;
+
+  font-size: 15px;
+  bottom: -5px;
+  margin-left: -2px;
+}
+
+.brujulaEste{
+  position: absolute;
+  font-size: 15px;
+  top: 50%;
+  margin-top: -8px;
+}
+
+.brujulaOeste{
+  position: absolute;
+  font-size: 15px;
+  top: 50%;
+  margin-top: -9px;
+}
+
+.brujulaCentrada{
+  margin: 0 auto;
+}
+
+.lunaBrujula{
+  font-size: 3em;
+  margin-top: -15px;
+  margin-left: -15px;
+}
+
+
+.lunaVisible{
+  opacity: 1;
+}
+.lunaInvisible{
+  opacity: 0.4;
+}
+
+.solBrujula{
+  font-size: 3em;
+  margin-top: 0px;
+  margin-left: 10px;
+}
+.solVisible{
+  opacity: 1;
+}
+.solInvisible{
+  opacity: 0.4;
+}
