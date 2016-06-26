@@ -12,6 +12,9 @@
 .toggle-small input:checked + .track .handle {
   background-color: rgba(137, 107, 235, 0.9); }
 
+.toggle input:checked + .track {
+  border-color: rgba(137, 107, 235, 0.9); }
+
 ion-header-bar {
   background-color: rgba(137, 107, 235, 0.7) !important; }
 
@@ -242,6 +245,28 @@ ion-header-bar {
 .datosClima .item {
   text-align: center;
   padding: 3px; }
+
+.rangoBrujula {
+  position: absolute;
+  bottom: 0px;
+  width: 78%;
+  height: 43px;
+  margin-bottom: 35px;
+  right: 0px;
+  border: 0px; }
+
+.toggleRangoBrujula {
+  position: absolute;
+  bottom: 0px;
+  width: 20%;
+  height: 43px;
+  margin-bottom: 35px;
+  left: 0px;
+  border: 0px;
+  padding: 0px; }
+
+.deshabilitado {
+  opacity: 0.4; }
 
 @-webkit-keyframes fadein {
   from {

@@ -24,6 +24,9 @@ $letrasColor1:#FFF;
   background-color: $color0;
 }
 
+.toggle input:checked + .track {
+          border-color: $color0;
+}
 ion-header-bar{
   background-color: $color1 !important;
 }
@@ -332,6 +335,29 @@ ion-header-bar{
   padding: 3px;
 }
 
+.rangoBrujula{
+  position: absolute;
+  bottom: 0px;
+  width: 78%;
+  height: 43px;
+  margin-bottom: 35px;
+  right: 0px;
+  border:0px;
+}
+.toggleRangoBrujula{
+  position: absolute;
+  bottom: 0px;
+  width: 20%;
+  height: 43px;
+  margin-bottom: 35px;
+  left: 0px;
+  border: 0px;
+  padding: 0px;
+}
+
+.deshabilitado{
+  opacity:0.4;
+}
 
 
 

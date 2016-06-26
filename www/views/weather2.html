@@ -76,8 +76,7 @@
               <div class="icon ion-android-sunny" style="font-size:52px"></div>
               <div>Salida {{w.datosSol[0].sunrise | horasMinutos}} -
                 Puesta {{w.datosSol[0].sunset | horasMinutos}}</div>
-                <div>Altitud: {{w.datosSol[0].altitude | altitud}}</div>
-                <div>Azimuth: {{w.datosSol[0].azimuth | azimuth}} </div>
+                <div>Altitud: {{w.datosSol[0].altitude | altitud}} - Azimuth: {{w.datosSol[0].azimuth | azimuth}}</div>
                 <div>Hora mejor fotografía: {{w.datosSol[0].goldenHour | horasMinutos}} - {{w.datosSol[0].goldenHourEnd | horasMinutos}} </div>
               </div>
               <div class="item">
@@ -85,17 +84,31 @@
                 <div>Día: {{w.datosLuna[0].alterday.toFixed(2)}} - {{w.datosLuna[0].phase|trim|nombreFaseLunar}}</div>
                 <div>Salida {{w.datosLuna[0].rise | horasMinutos}} - Puesta {{w.datosLuna[0].set | horasMinutos}} </div>
 
-                <div>Altitud: {{w.datosLuna[0].altitude | altitud}}</div>
-                <div>Azimuth: {{w.datosLuna[0].azimuth | azimuth}}</div>
+                <div>Altitud: {{w.datosLuna[0].altitude | altitud}} - Azimuth: {{w.datosLuna[0].azimuth | azimuth}}</div>
                 <div>Distancia: {{w.datosLuna[0].distance |number}}km</div>
               </div>
               <div class="item">
-                <brujula tamanio="168"  fecha="{{w.fechaAhoraMismo}}"  lat="{{w.forecast.latitude}}" lng="{{w.forecast.longitude}}"></brujula>
+                <!-- <div brujula tamanio="168"   lat="{{w.forecast.latitude}}" lng="{{w.forecast.longitude}}"></div> -->
+                <div brujula tamanio="168"   altitud-sol="{{w.datosSol[0].altitude}}" azimuth-sol="{{w.datosSol[0].azimuth}}" altitud-luna="{{w.datosLuna[0].altitude}}" azimuth-luna="{{w.datosLuna[0].azimuth}}"></div>
+                <span class="badge badge-dark" ng-class="{'deshabilitado':w.settings.live===true}">{{w.hora}} : {{w.minutos}} horas</span>
+                
               </div>
-              
+
+            </div>
+
+
+            <ion-toggle toggle-class="toggle-morado" ng-change="w.cambioToggleLive()"
+            ng-model="w.settings.live"
+            ng-true-value="true"
+            ng-false-value="false" class="toggleRangoBrujula"></ion-toggle>
+            <div class="item range range-positive rangoBrujula"  ng-class="{'deshabilitado':w.settings.live===true}">
+              0 <input type="range" name="hours" ng-model="w.hora" min="0" max="23" value="{{w.hora}}" ng-change="w.modoLiveFunc()" ng-disabled="w.settings.live===true"> 23
             </div>
 
           </div>
+
+
+
         </ion-slide-page>
 
       </ion-slides>

@@ -18,6 +18,7 @@
     })
     .state('settings', {
       url: '/settings',
+      cache: false,
       controller: 'SettingsController',
       controllerAs: 'st',
       templateUrl: 'views/settings.html'

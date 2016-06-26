@@ -4,12 +4,12 @@
   angular.module('app')
   .controller('WeatherController', WeatherController);
   WeatherController.$inject=['$scope','$window','$log', '$stateParams', '$ionicPlatform', '$ionicLoading', '$ionicActionSheet',
-  '$ionicModal', '$timeout', 'ubicacionesService', 'settingsService', 'forecastService','$cordovaVibration','cordovaDeviceOrientationService',
+  '$ionicModal', '$timeout', 'ubicacionesService', 'settingsService', 'forecastService','$cordovaVibration',
   'utils','ttsService','sunCalService','$interval','$rootScope'];
 
   /* @ngInject */
   function WeatherController($scope, $window, $log, $stateParams, $ionicPlatform, $ionicLoading, $ionicActionSheet,
-    $ionicModal, $timeout, ubicacionesService, settingsService, forecastService, $cordovaVibration, cordovaDeviceOrientationService,
+    $ionicModal, $timeout, ubicacionesService, settingsService, forecastService, $cordovaVibration,
     utils,ttsService,sunCalService,$interval,$rootScope){
 
       var vm=this;
@@ -18,7 +18,8 @@
       vm.params = $stateParams;  //parametros que se han pasado desde la vista search con ui-sref, en app.js url: '/weather/:city/:lat/:lng'
 
       vm.settings = utils.getStorage('config') || settingsService;
-
+      vm.hora=moment().format('HH');
+      vm.minutos=moment().format('mm');
 
 
       /**
@@ -51,26 +52,39 @@
       //fin slider
 
       //datos del sol de un día
-      vm.getDatosSol=function(){
-        vm.datosSol =sunCalService.calcula('sol',vm.params.lat, vm.params.lng,1);
+      vm.getDatosSol=function(hora){
+        vm.datosSol =sunCalService.calcula('sol',vm.params.lat, vm.params.lng,1,hora);
         $log.debug('datosSol',vm.datosSol[0]);
       }
       //datos luna de un día
-      vm.getDatosLuna=function(){
-        vm.datosLuna =sunCalService.calcula('luna',vm.params.lat, vm.params.lng,1);
+      vm.getDatosLuna=function(hora){
+        vm.datosLuna =sunCalService.calcula('luna',vm.params.lat, vm.params.lng,1,hora);
         $log.debug('datosLuna',vm.datosLuna[0]);
       }
 
 
-      //modo live. para refresco continuo de pantalla 3. posicion de sol y luna.
-      $interval.cancel($rootScope.modoLive);
-      if(vm.settings.live===true){
-        $rootScope.modoLive=$interval(function(){
+      vm.modoLiveFunc=function(){
+        $interval.cancel($rootScope.modoLive);
+        if(vm.settings.live===true){
           vm.getDatosSol();
           vm.getDatosLuna();
-          vm.fechaAhoraMismo=new Date();
-        }, 10000, 1000);
-      }
+          //modo live. para refresco continuo de pantalla 3. posicion de sol y luna.
+          $rootScope.modoLive=$interval(function(){
+            vm.getDatosSol();
+            vm.getDatosLuna();
+            vm.fechaAhoraMismo=new Date();
+            vm.hora=moment().format('HH');
+            vm.minutos=moment().format('mm');
+          }, 10000, 1000);
+        }else{
+          $log.debug('modo no live. hora: ', vm.hora);
+          vm.getDatosSol(vm.hora);
+          vm.getDatosLuna(vm.hora);
+          vm.minutos=moment().format('mm');
+        }
+      };
+
+
 
       //refresca la pantalla y llama al rest forecast
       vm.refrescar = function() {
@@ -78,15 +92,17 @@
         $log.debug('llamando al refresco');
         vm.getDatosSol();
         vm.getDatosLuna();
-
+        vm.modoLiveFunc();
 
         //llama a servicio forecast
         forecastService.getForecast(vm.params,vm.settings).then(function(response){
           vm.fechaAhoraMismo=new Date();
+
           vm.alertaHoras(response.hourly.data);
           vm.forecast = response;
           vm.resumenAlerta=response.hourly.summary;
           vm.ko=false;
+          console.log('servicio forecast')
         }).catch(function(){
           vm.ko=true;
           $log.debug('error, sin internet!!!');
@@ -129,6 +145,10 @@
           MAX_VIENTO= MAX_VIENTO/0.44704;
         }
 
+        //de las mas de 48 horas que envia, solo quiero las 12.
+        if(arrayHoras.length>12){
+          arrayHoras=arrayHoras.slice(0,12);
+        }
         for (var i = 0; i < arrayHoras.length; i++) {
           if(parseFloat(arrayHoras[i].temperatureMax || arrayHoras[i].temperature) > MAX_TEMP){
             if(muchoCalor===false){
@@ -267,6 +287,15 @@
           }
         });
       };
+
+      vm.settings = utils.getStorage('config') || settingsService;
+      vm.cambioToggleLive=function(){
+        utils.setStorage('config',vm.settings);
+        vm.modoLiveFunc();
+        vm.hora=moment().format('HH');
+        vm.minutos=moment().format('mm');
+      };
+
 
       $scope.mimodal={};
       $scope.mimodal.params={

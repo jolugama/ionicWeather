@@ -15,10 +15,15 @@
 
     return service;
 
-    function calcula(tipo,lat,lon,dias) {
-
+    function calcula(tipo,lat,lon,dias,hora) {
       var days = [];
-      var day = Date.now();
+      var day = new Date().getTime();//Date.now();
+      if(dias && dias===1 && hora){
+        day=new Date();
+        day.setHours(parseInt(hora));
+        console.log('fechaManual',day);
+        day=day.getTime();
+      }
         day -= 1000 * 60 * 60 * 24;
       for (var i = 0; i < dias; i++) {
         day += 1000 * 60 * 60 * 24;
