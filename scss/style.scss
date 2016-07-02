@@ -237,11 +237,11 @@ ion-header-bar{
 }
 
 .superLunaRow{
-  background-color: rgba(255, 28, 4, 0.21) !important;
+  background-color: $color4 !important;
 }
 .superLunaCol{
   font-weight: bold;
-  color:rgba(255, 4, 4, 0.8);
+  color:$color0;
 }
 //fin modal
 
@@ -340,7 +340,7 @@ ion-header-bar{
   bottom: 0px;
   width: 78%;
   height: 43px;
-  margin-bottom: 35px;
+  margin-bottom: 30px;
   right: 0px;
   border:0px;
 }
@@ -349,7 +349,7 @@ ion-header-bar{
   bottom: 0px;
   width: 20%;
   height: 43px;
-  margin-bottom: 35px;
+  margin-bottom: 30px;
   left: 0px;
   border: 0px;
   padding: 0px;

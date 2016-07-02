@@ -10,12 +10,12 @@
   /* @ngInject */
   function ttsService(utils,$log,settingsService) {
     var service = {
-      habla: habla
+      habla: _habla
     };
 
     return service;
 
-    function habla(texto) {
+    function _habla(texto) {
       if(texto && texto.length>1){
         var settings = utils.getStorage('config');
         var local='';

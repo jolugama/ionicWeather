@@ -3,7 +3,7 @@
 </div>
 <div ng-if="tipoIcono==='animado'">
   <div ng-if="clima==='clear-day'" class="weatherIcon">
-    <div class="sun">
+    <div class="sun" ng-class="{'sunAlarm': alarma.length>0}">
       <div class="rays"></div>
     </div>
   </div>
@@ -39,7 +39,7 @@
   </div>
   <div ng-if="clima==='partly-cloudy-day'" class="weatherIcon">
     <div class="cloud"></div>
-    <div class="sun">
+    <div class="sun" ng-class="{'sunAlarm': alarma.length>0}">
       <div class="rays"></div>
     </div>
   </div>

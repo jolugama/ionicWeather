@@ -7,8 +7,15 @@ forecastService.$inject=['$http','$q','$log'];
 
 /* @ngInject */
 function forecastService($http,$q,$log){
-  var vm=this;
-  vm.getForecast=function(stateParams,settings){
+
+  var service = {
+    getForecast: _getForecast
+  };
+
+  return service;
+
+
+  function _getForecast(stateParams,settings){
     var defer = $q.defer();
     var promise = defer.promise;
     //upload https://api.forecast.io/forecast/fbff4e86f9ba7ea95551c176e59ddb03/ en lugar de /api/forecast/
@@ -21,10 +28,9 @@ function forecastService($http,$q,$log){
       defer.reject(err);
     });
     return promise;
-  };
+  }
 
 
-  return vm;
 }
 
 })();

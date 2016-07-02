@@ -7,9 +7,13 @@
 
   /* @ngInject */
   function cordovaGeolocationService($q,$cordovaGeolocation,$log){
-    var vm=this;
+    var service = {
+        geolocation: _geolocation
+    };
 
-    vm.geolocation=function(){
+    return service;
+
+    function _geolocation(){
       var defer = $q.defer();
       var promise = defer.promise;
       var posOptions = {timeout: 20000, enableHighAccuracy: true};
@@ -21,10 +25,8 @@
         defer.reject(err);
       });
       return promise;
-    };
+    }
 
-
-    return vm;
   }
 
 })();

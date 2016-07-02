@@ -4,6 +4,14 @@ $colorFondoIcono: rgba(255, 255, 255, 1);
 $boxShadow1: rgba(100,100,100,0.1);
 $boxShadow2: rgba(100,100,100,0.2);
 $colorRelampago: rgb(237, 217, 32);
+//colores aplicación
+$color0:rgba(#896beb, 0.90);
+$color1:rgba(#896beb, 0.70);
+$color2:rgba(#896beb, 0.65);
+$color3:rgba(#896beb, 0.45);
+$color4:rgba(#896beb, 0.20);
+$color5:rgba(#896beb, 0.15);
+$color6:rgba(#896beb, 0.02);
 
 
 $interaccion: 10;
@@ -80,8 +88,13 @@ $interaccion: 10;
   background: currentColor;
   border-radius: 50%;
   box-shadow: 0 0 0 0.375em $colorIcono;
-  animation: spin 12s $interaccion linear;
-  color: yellow;
+  animation: spin 13s $interaccion linear;
+  color: $color4;
+}
+.sunAlarm{
+  animation: spin 4s $interaccion*4 linear;
+
+  color: $color2;
 }
 .moon {
   position: absolute;

@@ -10,17 +10,17 @@
   /* @ngInject */
   function utils() {
     var service = {
-      getStorage: getStorage,
-      setStorage: setStorage
+      getStorage: _getStorage,
+      setStorage: _setStorage
     };
 
     return service;
 
 
-    function getStorage(tipo){
+    function _getStorage(tipo){
       return tipo==='config' ? angular.fromJson(localStorage.getItem('ionicWeather-config')) : angular.fromJson(localStorage.getItem('ionicWeather-data'));
     }
-    function setStorage(tipo,data){
+    function _setStorage(tipo,data){
       var nameLocalStorage='';
       if(tipo==='config'){
         nameLocalStorage='ionicWeather-config'

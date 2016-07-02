@@ -4,13 +4,13 @@
   angular.module('app')
   .controller('WeatherController', WeatherController);
   WeatherController.$inject=['$scope','$window','$log', '$stateParams', '$ionicPlatform', '$ionicLoading', '$ionicActionSheet',
-  '$ionicModal', '$timeout', 'ubicacionesService', 'settingsService', 'forecastService','$cordovaVibration',
-  'utils','ttsService','sunCalService','$interval','$rootScope'];
+  '$ionicModal', '$timeout', 'ubicacionesService', 'settingsService', 'forecastService',
+  'utils','ttsService','sunCalService','$interval','$rootScope','alertaService'];
 
   /* @ngInject */
   function WeatherController($scope, $window, $log, $stateParams, $ionicPlatform, $ionicLoading, $ionicActionSheet,
-    $ionicModal, $timeout, ubicacionesService, settingsService, forecastService, $cordovaVibration,
-    utils,ttsService,sunCalService,$interval,$rootScope){
+    $ionicModal, $timeout, ubicacionesService, settingsService, forecastService,
+    utils,ttsService,sunCalService,$interval,$rootScope,alertaService){
 
       var vm=this;
       vm.carga=false;
@@ -121,125 +121,10 @@
         ttsService.habla(frase);
       };
 
+       vm.alertaHoras= function(alertaHoras){
+         vm.alarmaIcono=alertaService.alertaHoras(alertaHoras);
+       };
 
-      vm.alertaHoras=function(arrayHoras){
-        //clear-day, clear-night, rain, snow, sleet, wind, fog, cloudy, partly-cloudy-day, or partly-cloudy-night
-        var lluvia=false;
-        var nieve=false;
-        var aguanieve=false;
-        var muchoViento=false;
-        var muchoCalor=false;
-        var muchoFrio=false;
-        vm.AlarmaIcono=[];
-        //busca si hay alarmas en alguna hora del día.
-        //Si hay más de una, mostrará si llueve o nieva, hace viento fuerte, clima muy alto o muy bajo, por este orden
-
-        var MAX_TEMP=35;
-        var MIN_TEMP=0;
-        var MAX_VIENTO=11;
-        var settings = utils.getStorage('config') || settingsService;
-        //si esta en modo us, transformamos los max, min a farenheit. y millas/h
-        if(settings.units==='us'){
-          MAX_TEMP= MAX_TEMP * 9 / 5 + 32;
-          MIN_TEMP= MIN_TEMP * 9 / 5 + 32;
-          MAX_VIENTO= MAX_VIENTO/0.44704;
-        }
-
-        //de las mas de 48 horas que envia, solo quiero las 12.
-        if(arrayHoras.length>12){
-          arrayHoras=arrayHoras.slice(0,12);
-        }
-        for (var i = 0; i < arrayHoras.length; i++) {
-          if(parseFloat(arrayHoras[i].temperatureMax || arrayHoras[i].temperature) > MAX_TEMP){
-            if(muchoCalor===false){
-              vm.AlarmaIcono.push('muchoCalor');
-            }
-            muchoCalor=true;
-          }else if(parseFloat(arrayHoras[i].temperatureMax ) < MIN_TEMP){
-            if(muchoFrio===false){
-              vm.AlarmaIcono.push('muchoFrio');
-            }
-            muchoFrio=true;
-
-          }
-
-          if(parseFloat(arrayHoras[i].windSpeed) > MAX_VIENTO){
-            if(muchoViento===false){
-              vm.AlarmaIcono.push('wind');
-            }
-            muchoViento=true;
-
-          }
-
-          if(arrayHoras[i].icon==='rain'){
-            if(lluvia===false){
-              vm.AlarmaIcono.push('rain');
-            }
-            lluvia=true;
-          }else if(arrayHoras[i].icon==='snow'){
-            if(nieve===false){
-              vm.AlarmaIcono.push('snow');
-            }
-            nieve=true;
-          }else if(arrayHoras[i].icon==='sleet'){
-            if(aguanieve===false){
-              vm.AlarmaIcono.push('sleet');
-            }
-            aguanieve=true;
-
-          }
-
-        }
-
-        if(vm.AlarmaIcono.length===0){
-          vm.AlarmaIcono.push('info'); // icono por defecto en alarma
-        }
-        $log.debug('alarmaicono',vm.AlarmaIcono)
-
-        var frase='';
-        if(lluvia || nieve || aguanieve){
-          frase='Posibilidad de lluvia.';
-          try {
-            $cordovaVibration.vibrate([100, 500, 500, 500, 1000]);
-          } catch (e) {
-
-          }
-          if(nieve || aguanieve){
-            frase+='Posibilidad de nieve o aguanieve. ';
-            try {
-              $cordovaVibration.vibrate([1000, 1000, 3000, 1000, 5000]);
-
-            } catch (e) {
-
-            }
-          }
-        }
-        if(muchoViento){
-          frase+='hace mucho viento.'
-          try {
-            $cordovaVibration.vibrate(500);
-          } catch (e) {
-
-          }
-        }
-        if(muchoCalor){
-          frase+='hace mucho calor.';
-          try {
-            $cordovaVibration.vibrate(500);
-          } catch (e) {
-
-          }
-        }else if(muchoFrio){
-          frase+='hace mucho frío.';
-          try {
-            $cordovaVibration.vibrate(500);
-          } catch (e) {
-
-          }
-        }
-        ttsService.habla(frase);
-
-      };
 
       vm.refrescar();
       $window.addEventListener('orientationchange', function() {

@@ -66,9 +66,14 @@
   background: currentColor;
   border-radius: 50%;
   box-shadow: 0 0 0 0.375em #000;
-  -webkit-animation: spin 12s 10 linear;
-          animation: spin 12s 10 linear;
-  color: yellow; }
+  -webkit-animation: spin 13s 10 linear;
+          animation: spin 13s 10 linear;
+  color: rgba(137, 107, 235, 0.2); }
+
+.sunAlarm {
+  -webkit-animation: spin 4s 40 linear;
+          animation: spin 4s 40 linear;
+  color: rgba(137, 107, 235, 0.65); }
 
 .moon {
   position: absolute;

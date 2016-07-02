@@ -12,7 +12,8 @@
             templateUrl: 'views/iconosTemplate.html',
             scope: {
               tipoIcono: '@',
-              clima: '@'
+              clima: '@',
+              alarma: '@'
 
             },
             link: linkFunc
@@ -24,7 +25,7 @@
         return directive;
 
         function linkFunc(scope, el, attr, ctrl) {
-
+    
         }
     }
 

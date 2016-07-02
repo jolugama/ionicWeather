@@ -13,7 +13,7 @@
       var promise = defer.promise;
 
       $cordovaDeviceOrientation.getCurrentHeading().then(function(result) {
-        
+
         var magneticHeading = result.magneticHeading;
         var trueHeading = result.trueHeading;
         var accuracy = result.headingAccuracy;

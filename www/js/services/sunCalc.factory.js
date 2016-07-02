@@ -10,12 +10,12 @@
   /* @ngInject */
   function sunCalService() {
     var service = {
-      calcula: calcula
+      calcula: _calcula
     };
 
     return service;
 
-    function calcula(tipo,lat,lon,dias,hora) {
+    function _calcula(tipo,lat,lon,dias,hora) {
       var days = [];
       var day = new Date().getTime();//Date.now();
       if(dias && dias===1 && hora){

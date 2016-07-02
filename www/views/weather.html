@@ -24,16 +24,16 @@
           <h1 class="title">{{w.params.city.split(',')[0]}}, {{w.params.city.split(',')[1]}}. {{w.params.city.split(',')[2]}}</h1>
         </div>
         <div class="has-header" ng-show="w.carga">
-          <button class="button button-full  botonAlarma" ng-class="{'botonAlarmado':w.AlarmaIcono[0]!='info', 'botonInfo':w.AlarmaIcono[0]=='info'}" ng-click="w.clickAlarma(w.resumenAlerta)">
-            <div class="icon  iconoDiario" ng-repeat="alarma in w.AlarmaIcono" ng-class="alarma | icons"></div>
+          <button class="button button-full  botonAlarma" ng-class="{'botonAlarmado':w.alarmaIcono[0]!='info', 'botonInfo':w.alarmaIcono[0]=='info'}" ng-click="w.clickAlarma(w.resumenAlerta)">
+            <div class="icon  iconoDiario" ng-repeat="alarma in w.alarmaIcono" ng-class="alarma | icons"></div>
           </button>
           <h2 class="primary ">{{w.forecast.currently.temperature | temperatura}}</h2>
-          <!-- <div class="boxAlarma" ng-class="{'alertaActivada':w.AlarmaIcono[0]!=='info'}" ng-click="w.clickAlarma(w.resumenAlerta)" > -->
+          <!-- <div class="boxAlarma" ng-class="{'alertaActivada':w.alarmaIcono[0]!=='info'}" ng-click="w.clickAlarma(w.resumenAlerta)" > -->
           <!-- </div> -->
 
 
 
-          <div icono-Tiempo tipo-icono="{{w.settings.icono}}" clima="{{w.forecast.currently.icon}}"> </div>
+          <div icono-Tiempo tipo-icono="{{w.settings.icono}}" clima="{{w.forecast.currently.icon}}" alarma="{{w.alarmaIcono}}"> </div>
 
 
           <div class="info" ng-show="w.carga">

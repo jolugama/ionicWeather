@@ -7,8 +7,13 @@
 
   /* @ngInject */
   function geocodeService($http,$q,$log){
-    var vm=this;
-    vm.getGeocode=function(busqueda){
+    var service = {
+      getGeocode: _getGeocode
+    };
+
+    return service;
+
+    function _getGeocode(busqueda){
       var defer = $q.defer();
       var promise = defer.promise;
       if(busqueda.indexOf('{')===0 && busqueda.indexOf('}')>5){ //si vienen los datos por lat o lon
@@ -33,10 +38,10 @@
         });
       }
       return promise;
-    };
+    }
 
 
-    return vm;
+
   }
 
 })();
