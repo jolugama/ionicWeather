@@ -2,10 +2,12 @@
 It provides a weather forecast for GPS, and manually 8 days, as well as warnings of rain, wind, snow, cold, heat.
 It also has a weekly report, solar and lunar calendar, moon phases, positioning of the sun and moon hours by azimuth and elevation.
 
+![Weather](/screenshots/weather.png)
 
-## Installation & Update
+## Installation & run
 ```
 $ npm install && bower install
+$ ionic serve
 ```
 
 
@@ -15,7 +17,6 @@ All encoded with the good practices of John Papa, designed in ionic 1.3, angular
 
 ## Screenshots
 ![Búsqueda](/screenshots/busqueda.png)
-![Weather](/screenshots/weather.png)
 ![Predicción](/screenshots/prediccion.png)
 ![infoSolLuna](/screenshots/infoSolLuna.png)
 ![Config](/screenshots/config.png)
