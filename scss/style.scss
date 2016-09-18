@@ -332,7 +332,7 @@ ion-header-bar{
 //3º pantalla
 .datosClima .item{
   text-align: center;
-  padding: 3px;
+  padding: 8px;
 }
 
 .rangoBrujula{
@@ -359,7 +359,22 @@ ion-header-bar{
   opacity:0.4;
 }
 
-
+#imagenSol{
+  width: 60px;
+  position: absolute;
+  left: 0px;
+}
+#datosSol{
+  margin-left: 60px !important;
+}
+#imagenLuna{
+  width: 60px;
+  position:absolute;
+  left: 0px;
+}
+#datosLuna{
+    margin-left: 60px !important;
+}
 
 
 
