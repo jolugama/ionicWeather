@@ -14,13 +14,13 @@ All encoded with the good practices of John Papa, designed in ionic 1.3, angular
 
 
 ## Screenshots
-![Búsqueda](https://github.com/jolugama/ionicWeather/tree/master/screenshots/busqueda.png)
-![Weather](https://github.com/jolugama/ionicWeather/tree/master/screenshots/weather.png)
-![Predicción](https://github.com/jolugama/ionicWeather/tree/master/screenshots/prediccion.png)
-![infoSolLuna](https://github.com/jolugama/ionicWeather/tree/master/screenshots/infoSolLuna.png)
-![Config](https://github.com/jolugama/ionicWeather/tree/master/screenshots/config.png)
-![Menú](https://github.com/jolugama/ionicWeather/tree/master/screenshots/menu.png)
-![Opciones](https://github.com/jolugama/ionicWeather/tree/master/screenshots/opciones.png)
-![CalendarioLunar](https://github.com/jolugama/ionicWeather/tree/master/screenshots/calendarioLunar.png)
-![CalendarioSolar](https://github.com/jolugama/ionicWeather/tree/master/screenshots/calendarioSolar.png)
+![Búsqueda](/screenshots/busqueda.png)
+![Weather](/screenshots/weather.png)
+![Predicción](/screenshots/prediccion.png)
+![infoSolLuna](/screenshots/infoSolLuna.png)
+![Config](/screenshots/config.png)
+![Menú](/screenshots/menu.png)
+![Opciones](/screenshots/opciones.png)
+![CalendarioLunar](/screenshots/calendarioLunar.png)
+![CalendarioSolar](/screenshots/calendarioSolar.png)
 
