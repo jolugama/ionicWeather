@@ -17,10 +17,13 @@
       vm.ko=false;
       vm.params = $stateParams;  //parametros que se han pasado desde la vista search con ui-sref, en app.js url: '/weather/:city/:lat/:lng'
 
-      vm.settings = utils.getStorage('config') || settingsService;
+      if(utils.getStorage('config')===null){
+        utils.setStorage('config',settingsService.settings()); 
+      }
+      vm.settings = utils.getStorage('config');
       vm.hora=moment().format('HH');
       vm.minutos=moment().format('mm');
-
+// {"lang":"es","units":"si","icono":"animado","days":"8"}
 
       /**
       * carga del loading ionic. duration: duración máxima. Tiene un lag de 1 segundo (en ionic hide)
