@@ -74,21 +74,27 @@
 
         <div class="list has-header datosClima">
           <div class="item">
-            <div class="icon ion-android-sunny" style="font-size:52px"></div>
-            <div>Salida {{w.datosSol[0].sunrise | horasMinutos}} -
-              Puesta {{w.datosSol[0].sunset | horasMinutos}}</div>
-              <div>Altitud: {{w.datosSol[0].altitude | altitud}}</div>
-              <div>Azimuth: {{w.datosSol[0].azimuth | azimuth}} </div>
-              <div>Hora mejor fotografía: {{w.datosSol[0].goldenHour | horasMinutos}} - {{w.datosSol[0].goldenHourEnd | horasMinutos}} </div>
+            <div id="imagenSol" class="icon ion-android-sunny" style="font-size:52px"></div>
+            <div id="datosSol">
+              <div>Salida {{w.datosSol[0].sunrise | horasMinutos}} -
+                Puesta {{w.datosSol[0].sunset | horasMinutos}}</div>
+                <div>Altitud: {{w.datosSol[0].altitude | altitud}}</div>
+                <div>Azimuth: {{w.datosSol[0].azimuth | azimuth}} </div>
+                <div>Hora mejor fotografía: {{w.datosSol[0].goldenHour | horasMinutos}} - {{w.datosSol[0].goldenHourEnd | horasMinutos}} </div>
+              </div>
             </div>
             <div class="item">
-              <fase-lunar  tamanio-luna="50"  fecha="{{w.fechaAhoraMismo}}"  lat="{{w.forecast.latitude}}" lng="{{w.forecast.longitude}}" title=""></fase-lunar>
-              <div>Día: {{w.datosLuna[0].alterday.toFixed(2)}} - {{w.datosLuna[0].phase|trim|nombreFaseLunar}}</div>
-              <div>Salida {{w.datosLuna[0].rise | horasMinutos}} - Puesta {{w.datosLuna[0].set | horasMinutos}} </div>
+              <div id="imagenLuna">
+                <fase-lunar  tamanio-luna="50"  fecha="{{w.fechaAhoraMismo}}"  lat="{{w.forecast.latitude}}" lng="{{w.forecast.longitude}}" title=""></fase-lunar>
+              </div>
+              <div id="datosLuna">
+                <div>Día: {{w.datosLuna[0].alterday.toFixed(2)}} - {{w.datosLuna[0].phase|trim|nombreFaseLunar}}</div>
+                <div>Salida {{w.datosLuna[0].rise | horasMinutos}} - Puesta {{w.datosLuna[0].set | horasMinutos}} </div>
 
-              <div>Altitud: {{w.datosLuna[0].altitude | altitud}}</div>
-              <div>Azimuth: {{w.datosLuna[0].azimuth | azimuth}}</div>
-              <div>Distancia: {{w.datosLuna[0].distance |number}}km</div>
+                <div>Altitud: {{w.datosLuna[0].altitude | altitud}}</div>
+                <div>Azimuth: {{w.datosLuna[0].azimuth | azimuth}}</div>
+                <div>Distancia: {{w.datosLuna[0].distance |number}}km</div>
+              </div>
             </div>
 
             <div class="item">

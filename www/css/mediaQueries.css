@@ -1,3 +1,29 @@
+@media (max-height: 540px) and (orientation: portrait) {
+  .scroll-page .primary {
+    font-size: 2.3em !important; }
+  .padding {
+    padding: 5px !important; }
+  p {
+    margin: 0px; }
+  .fila {
+    height: 40px; }
+  #imagenSol {
+    width: 60px;
+    position: absolute;
+    left: 0px; }
+  #datosSol {
+    line-height: 1.4em !important; }
+  #imagenLuna {
+    width: 60px;
+    position: absolute;
+    left: 0px; }
+  #datosLuna {
+    line-height: 1.4em !important; }
+  .weatherIcon {
+    font-size: 1.5em !important; }
+  .datosClima .item {
+    font-size: 0.8em; } }
+
 @media (max-height: 440px) and (orientation: landscape) {
   .scroll-page .primary {
     font-size: 2em !important;
