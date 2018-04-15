@@ -18,8 +18,8 @@ function forecastService($http,$q,$log){
   function _getForecast(stateParams,settings){
     var defer = $q.defer();
     var promise = defer.promise;
-    //upload https://api.forecast.io/forecast/fbff4e86f9ba7ea95551c176e59ddb03/ en lugar de /api/forecast/
-    $http.get('https://api.forecast.io/forecast/fbff4e86f9ba7ea95551c176e59ddb03/' + stateParams.lat + ',' + stateParams.lng, {params: {units: settings.units, lang: settings.lang}}).then(function(response){
+    //upload https://api.darksky.net/forecast/fbff4e86f9ba7ea95551c176e59ddb03/ en lugar de api/forecast/
+    $http.get('https://api.darksky.net/forecast/fbff4e86f9ba7ea95551c176e59ddb03/' + stateParams.lat + ',' + stateParams.lng, {params: {units: settings.units, lang: settings.lang}}).then(function(response){
       $log.debug('rest forecast',response.data);
       defer.resolve(response.data);
     })

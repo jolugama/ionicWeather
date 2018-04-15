@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -15,33 +15,34 @@
 
     return service;
 
-    function _calcula(tipo,lat,lon,dias,hora) {
+    function _calcula(tipo, lat, lon, dias, hora) {
       var days = [];
       var day = new Date().getTime();//Date.now();
-      if(dias && dias===1 && hora){
-        day=new Date();
+      if (dias && dias === 1 && hora) {
+        day = new Date();
         day.setHours(parseInt(hora));
-        console.log('fechaManual',day);
-        day=day.getTime();
+        console.log('fechaManual', day);
+        day = day.getTime();
       }
+
         day -= 1000 * 60 * 60 * 24;
       for (var i = 0; i < dias; i++) {
         day += 1000 * 60 * 60 * 24;
-        if(tipo==='sol'){
+        if (tipo === 'sol') {
           days.push(SunCalc.getTimes(day, lat, lon));
 
-          var nuevoObjeto = angular.extend({}, days[days.length-1], SunCalc.getPosition(day, lat, lon));
-          days[days.length-1]=nuevoObjeto;
+          var nuevoObjeto = angular.extend({}, days[days.length - 1], SunCalc.getPosition(day, lat, lon));
+          days[days.length - 1] = nuevoObjeto;
 
-        }else if(tipo==='luna'){
+        }else if (tipo === 'luna') {
           days.push(SunCalc.getMoonTimes(day, lat, lon));
 
-          days[days.length-1].fecha=day; //añado la fecha al array
+          days[days.length - 1].fecha = day; //añado la fecha al array
 
-          var nuevoObjeto = angular.extend({}, days[days.length-1], SunCalc.getMoonIllumination(day));
-          days[days.length-1]=nuevoObjeto;
+          var nuevoObjeto = angular.extend({}, days[days.length - 1], SunCalc.getMoonIllumination(day));
+          days[days.length - 1] = nuevoObjeto;
 
-          var nuevoObjeto2 = angular.extend({}, days[days.length-1], MoonCalc.getMoonPosition(new Date(day),lat,lon));
+          var nuevoObjeto2 = angular.extend({}, days[days.length - 1], MoonCalc.getMoonPosition(new Date(day), lat, lon));
           days[days.length-1]=nuevoObjeto2;
 
           days[days.length-1].superLuna=parseInt(days[days.length-1].distance)<365000 ? true : "";

@@ -37,4 +37,8 @@
         <splash density="port-xxxhdpi" src="resources/android/splash/drawable-port-xxxhdpi-screen.png" />
     </platform>
     <icon src="resources/android/icon/drawable-xhdpi-icon.png" />
+    <plugin name="cordova-plugin-vibration" spec="~2.1.1" />
+    <plugin name="cordova-plugin-tts" spec="~0.2.3" />
+    <plugin name="cordova-plugin-network-information" spec="~1.2.1" />
+    <plugin name="org.apache.cordova.speech.speechrecognition" spec="https://github.com/macdonst/SpeechRecognitionPlugin" />
 </widget>

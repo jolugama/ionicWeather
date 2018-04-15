@@ -36,7 +36,7 @@
         }else if(settings.lang==='en'){
           locales=['en-EN','en-US','en-GB'];
           local=locales[Math.floor(Math.random() * locales.length)];
-          voces=['UK English Female','UK English Male','US English Female','Australian Female','US English Male'];
+          voces=['UK English Female','UK English Male','US English Female','US English Male']; //'Australian Female'
           voz = voces[Math.floor(Math.random() * voces.length)];
         }
 
